@@ -23,12 +23,11 @@ class UserSeeder extends Seeder
 
         $user->assignRole('Super Admin');
 
-
         // PAK NOVI
         $user = User::create([
-            'name' => "Pak Novi",
-            'username' => "Pak Novi",
-            'email' => "pak_novi@gmail.com",
+            'name' => "Novi Prayitno",
+            'username' => "Novi Prayitno",
+            'email' => "snoopy.exataindonesia2018@gmail.com",
             'password' => Hash::make("123exata"),
         ]);
 
