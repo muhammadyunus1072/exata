@@ -59,30 +59,8 @@
                                             @endphp
                                             <tr>
                                                 <td>{{$no++}}</td>
-                                                <td>Acc Japan</td> 
-                                                <td>Kirim email list cair ke pak Novi</td>
-                                                <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
-                                                    App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_JAPAN] ? '' : 'disabled') }}
-                                                    class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
-                                                </td>
-                                                <td>
-                                                    <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
-                                                </td>
-                                                <td>
-                                                    @if(Auth::user()->roles[0]->name == 
-                                                    App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_JAPAN])
-                                                        <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
-                                                    @endIf
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{$no++}}</td>
                                                 <td>Pak Novi</td> 
-                                                <td>Share email ke Accounting</td>
+                                                <td>Terima email dari pusat dan share ke accounting exata</td>
                                                 <td class="d-flex justify-content-center">
                                                     <input 
                                                     {{ (Auth::user()->roles[0]->name == 
@@ -257,13 +235,13 @@
                                             </tr>
                                             <tr>
                                                 <td>{{$no++}}</td>
-                                                <td>Acc</td> 
+                                                <td>Acc Exata</td> 
                                                 <td>Hitung, buat & Share kwitansi ke sales</td>
                                                 <td class="d-flex justify-content-center">
                                                     <input 
                                                     {{ (Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
                                                 </td>
                                                 <td>
@@ -272,20 +250,20 @@
                                                 <td>
                                                     @if(Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC])
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @endIf
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>{{$no++}}</td>
-                                                <td>Acc</td> 
+                                                <td>Acc Exata</td> 
                                                 <td>Cek & Print list cai</td>
                                                 <td class="d-flex justify-content-center">
                                                     <input 
                                                     {{ (Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
                                                 </td>
                                                 <td>
@@ -294,7 +272,7 @@
                                                 <td>
                                                     @if(Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC])
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @endIf
                                                 </td>
@@ -997,7 +975,7 @@
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
                                                 </td>
                                                 <td>
-                                                    {{-- <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p> --}}
+                                                    <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
                                                 </td>
                                                 <td>
                                                     @if(Auth::user()->roles[0]->name == 
@@ -1031,13 +1009,13 @@
                                             </tr>
                                             <tr>
                                                 <td>{{$no++}}</td>
-                                                <td>Acc</td> 
+                                                <td>Acc Exata</td> 
                                                 <td>Arsip print out list cair beserta slip transaksi bank</td>
                                                 <td class="d-flex justify-content-center">
                                                     <input 
                                                     {{ (Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
                                                 </td>
                                                 <td>
@@ -1046,7 +1024,7 @@
                                                 <td>
                                                     @if(Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC])
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @endIf
                                                 </td>

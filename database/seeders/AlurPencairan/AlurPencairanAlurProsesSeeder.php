@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\AlurPencairan;
 
+use App\Models\AlurPencairan\AlurPencairanAlurProses;
 use App\Repositories\AlurPencairan\AlurPencairanAlurProsesRepository;
 use Illuminate\Database\Seeder;
 
@@ -9,24 +10,16 @@ class AlurPencairanAlurProsesSeeder extends Seeder
 {
     public function run()
     {
-        $file = storage_path('app/alur_pencairan_alur_proses.csv');
 
-        $rows = array_map(function ($line) {
-            return str_getcsv($line, ';'); // IMPORTANT: delimiter ;
-        }, file($file));
+        foreach (AlurPencairanAlurProses::ALUR_PROSESES as $key => $alur_proses) {
 
-        collect($rows)
-            ->skip(1) // skip header row
-            ->each(function ($row) {
+            $data = [
+                'role_id'     => $alur_proses['role_id'],
+                'name'        => $alur_proses['name'],
+                'nomor_urut'  => $key + 1,
+            ];
 
-                $data = [
-                    'id'          => $row[0] ?? null,
-                    'role_id'     => $row[1] ?? null,
-                    'name'        => $row[2] ?? null,
-                    'nomor_urut'  => $row[3] ?? null,
-                ];
-
-                AlurPencairanAlurProsesRepository::create($data);
-            });
+            AlurPencairanAlurProsesRepository::create($data);
+        };
     }
 }

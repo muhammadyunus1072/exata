@@ -46,7 +46,7 @@ class Edit extends Component
             'qty_cair' => $alur_pencairan['qty_cair'],
             'status' => $alur_pencairan['status'],
             'alur_pencairan_id' => $alur_pencairan_id,
-            'keterangan' => "Total : " . $alur_pencairan['qty_cair'] . ", Belum Transfer : " . $alur_pencairan->AlurPencairanDetailOnProses->count() . ", Sisa :" . $alur_pencairan['qty_cair'] - $alur_pencairan->AlurPencairanDetailOnProses->count()
+            'keterangan' => "Total : " . $alur_pencairan['qty_cair'] . ", Belum Transfer : " . $alur_pencairan->AlurPencairanDetailOnProses->count() . ", Valid :" . $alur_pencairan['qty_cair'] - $alur_pencairan->AlurPencairanDetailOnProses->count()
         ];
         $alur_status = AlurPencairanStatusRepository::getAlurPencairan($alur_pencairan_id)->toArray();
         $this->alur_proseses = [];

@@ -15,16 +15,14 @@ class RoleSeeder extends Seeder
     {
         $role =
             $roles = [
-                ['name' => "Super Admin"],
-                ['name' => "Member"],
-                ['name' => "ACC Japan"],
-                ['name' => "Pak Novi"],
-                ['name' => "Acc Exata"],
-                ['name' => "HS"],
-                ['name' => "CC"],
-                ['name' => "Acc"],
-                ['name' => "Finance"],
-                ['name' => "Sales"],
+                ['name' => "Super Admin"], // 1
+                ['name' => "Pak Novi"], // 2
+                ['name' => "Acc Exata"], // 3
+                ['name' => "HS"], // 4
+                ['name' => "CC"], // 5
+                ['name' => "Finance"], // 6
+                ['name' => "Sales"], // 7
+                ['name' => "Member"], // 8
             ];
         foreach ($roles as $index => $role) {
             $roles[$index] = Role::create($role);

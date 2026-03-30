@@ -132,7 +132,7 @@ class Datatable extends Component
                 'searchable' => false,
                 'name' => 'Keterangan',
                 'render' => function ($item) {
-                    return "Total : " . $item['qty_cair'] . ", Belum Transfer : " . $item->AlurPencairanDetailOnProses->count() . ", Sisa :" . $item['qty_cair'] - $item->AlurPencairanDetailOnProses->count();
+                    return "Total : " . $item['qty_cair'] . ", Belum Transfer : " . $item->AlurPencairanDetailOnProses->count() . ", Valid :" . $item['qty_cair'] - $item->AlurPencairanDetailOnProses->count();
                 }
             ],
             [

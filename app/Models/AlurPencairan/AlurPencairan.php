@@ -23,12 +23,10 @@ class AlurPencairan extends Model
     ];
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_ACC_JAPAN = 'ACC Japan';
     const ROLE_PAK_NOVI = 'Pak Novi';
     const ROLE_ACC_EXATA = 'ACC Exata';
     const ROLE_HS = 'HS';
     const ROLE_CC = 'CC';
-    const ROLE_ACC = 'Acc';
     const ROLE_FINANCE = 'Finance';
     const ROLE_SALES = 'Sales';
 
@@ -116,12 +114,10 @@ class AlurPencairan extends Model
     // </div>
     const ROLE_ALIASE = [
         self::ROLE_ADMIN => 'Admin',
-        self::ROLE_ACC_JAPAN => 'ACC Japan',
         self::ROLE_PAK_NOVI => 'Pak Novi',
-        self::ROLE_ACC_EXATA => 'ACC Exata',
+        self::ROLE_ACC_EXATA => 'Acc Exata',
         self::ROLE_HS => 'HS',
         self::ROLE_CC => 'CC',
-        self::ROLE_ACC => 'Acc',
         self::ROLE_FINANCE => 'Finance',
         self::ROLE_SALES => 'Sales',
     ];
