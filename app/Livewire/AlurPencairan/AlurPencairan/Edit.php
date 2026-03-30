@@ -1,0 +1,438 @@
+<?php
+
+namespace App\Livewire\AlurPencairan\AlurPencairan;
+
+use App\Helpers\Alert;
+use App\Models\AlurPencairan\AlurPencairan;
+use App\Models\AlurPencairan\AlurPencairanDetail;
+use App\Models\AlurPencairan\AlurPencairanHistory;
+use App\Models\AlurPencairan\AlurPencairanStatus;
+use App\Repositories\AlurPencairan\AlurPencairanDetailRepository;
+use App\Repositories\AlurPencairan\AlurPencairanHistoryRepository;
+use App\Repositories\AlurPencairan\AlurPencairanRepository;
+use App\Repositories\AlurPencairan\AlurPencairanStatusRepository;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+
+class Edit extends Component
+{
+    use WithFileUploads;
+    public $alur_pencairan_id;
+    public $alur_pencairan = [];
+    public $alur_proseses = [];
+    public $data_salah_transfers = [];
+
+    public $data_transfer_removes = [];
+
+    public $jumlah_belum_melengkapi_rekening_salah;
+    public $jumlah_belum_transfer_susulan;
+
+    public function mount() {}
+
+
+    #[On('editAlurPencairan')]
+    public function editAlurPencairan($alur_pencairan_id)
+    {
+        $this->alur_pencairan_id = $alur_pencairan_id;
+        $alur_pencairan_id = Crypt::decrypt($alur_pencairan_id);
+        $alur_pencairan = AlurPencairanRepository::find($alur_pencairan_id);
+        $this->alur_pencairan = [
+            'judul' => $alur_pencairan['judul'],
+            'qty_cair' => $alur_pencairan['qty_cair'],
+            'status' => $alur_pencairan['status'],
+            'alur_pencairan_id' => $alur_pencairan_id,
+            'keterangan' => "Total : " . $alur_pencairan['qty_cair'] . ", Belum Transfer : " . $alur_pencairan->AlurPencairanDetailOnProses->count() . ", Sisa :" . $alur_pencairan['qty_cair'] - $alur_pencairan->AlurPencairanDetailOnProses->count()
+        ];
+        $alur_status = AlurPencairanStatusRepository::getAlurPencairan($alur_pencairan_id)->toArray();
+        $this->alur_proseses = [];
+        foreach ($alur_status as $detail) {
+
+            $this->alur_proseses[] = [
+                'id' => $detail['id'],
+                'role_id' => $detail['role_id'],
+                'creator_name' => $detail['status'] == AlurPencairanStatus::STATUS_PENDING ? '' : $detail['status'] . " oleh : " . $detail['creator_name'],
+                'alur_pencairan_alur_proses_id' => $detail['alur_pencairan_alur_proses_id'],
+                'role_name' => $detail['role_name'],
+                'name' => $detail['name'],
+                'tanggal_update' => $detail['status'] == AlurPencairanStatus::STATUS_PENDING ? '' : $detail['tanggal_update'],
+                'nomor_urut' => $detail['nomor_urut'],
+                'is_check' => $detail['status'] == AlurPencairanStatus::STATUS_DONE ? true : false,
+                'status' => $detail['status'],
+                'alur_pencairan_id' => $alur_pencairan_id,
+                'keterangan' => $detail['keterangan'],
+                // 'keterangan' => "HALO",
+                'keterangan_old' => $detail['keterangan'],
+            ];
+        }
+        $this->getJumlahBelumMelengkapiRekeningSalah();
+        $this->getJumlahBelumTransferSusulan();
+    }
+
+    private function getJumlahBelumMelengkapiRekeningSalah()
+    {
+        $this->jumlah_belum_melengkapi_rekening_salah = AlurPencairanDetailRepository::getBy(
+            [
+                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)],
+                ['rekening_terbaru', null],
+            ]
+        )->count();
+    }
+
+    #[On('on-dialog-confirm')]
+    public function onDialogConfirm()
+    {
+        $this->editAlurPencairan($this->alur_pencairan_id);
+        $this->getJumlahBelumMelengkapiRekeningSalah();
+        $this->getJumlahBelumTransferSusulan();
+    }
+
+    #[On('on-dialog-cancel')]
+    public function onDialogCancel()
+    {
+        $this->editAlurPencairan($this->alur_pencairan_id);
+        $this->getJumlahBelumMelengkapiRekeningSalah();
+        $this->getJumlahBelumTransferSusulan();
+    }
+
+    private function getJumlahBelumTransferSusulan()
+    {
+        $this->jumlah_belum_transfer_susulan = AlurPencairanDetailRepository::getBy(
+            [
+                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)],
+                ['tanggal_transfer', null],
+            ]
+        )->count();
+    }
+
+    public function getDataSalahTransfer()
+    {
+        $data_salah_transfers = AlurPencairanDetailRepository::getBy(
+            [
+                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)]
+            ]
+        );
+        $this->data_salah_transfers = [];
+        foreach ($data_salah_transfers as $detail) {
+            $this->data_salah_transfers[] = [
+                'id' => $detail['id'],
+                'no_input_jepang' => $detail['no_input_jepang'],
+                'nama_lengkap' => $detail['nama_lengkap'],
+                'tanggal_lahir' => $detail['tanggal_lahir'],
+                'nominal_cair' => $detail['nominal_cair'],
+                'rekening_terbaru' => $detail['rekening_terbaru'],
+                'tanggal_transfer' => $detail['tanggal_transfer'],
+                'rekening_terbaru_old' => $detail['rekening_terbaru'],
+                'tanggal_transfer_old' => $detail['tanggal_transfer'],
+                'creator_name' => $detail['creator']['name'],
+                'updator_rekening_terbaru_name' => $detail['updator_rekening_terbaru'] ? $detail['updator_rekening_terbaru']['name'] : '',
+                'updator_tanggal_transfer_name' => $detail['updator_tanggal_transfer'] ? $detail['updator_tanggal_transfer']['name'] : '',
+            ];
+        }
+    }
+
+    public function saveDataSalahTransfer()
+    {
+        try {
+            DB::transaction(function () {
+                $this->dispatch('consoleLog', $this->data_salah_transfers);
+                foreach ($this->data_salah_transfers as $data_tranfer) {
+
+                    $validateData = [
+                        'alur_pencairan_id' => Crypt::decrypt($this->alur_pencairan_id),
+                        'no_input_jepang' => $data_tranfer['no_input_jepang'],
+                        'nama_lengkap' => $data_tranfer['nama_lengkap'],
+                        'tanggal_lahir' => $data_tranfer['tanggal_lahir'],
+                        'nominal_cair' => $data_tranfer['nominal_cair'],
+                        'status' => AlurPencairanDetail::STATUS_PROSES,
+                        'status_updated_at' => now(),
+                        // 'mata_uang' => $data_tranfer['mata_uang'],
+                    ];
+                    // dd($validateData);
+                    if ($data_tranfer['id']) {
+                        # code...
+                        $vehicle = AlurPencairanDetailRepository::update($data_tranfer['id'], $validateData);
+                    } else {
+                        # code...
+                        $vehicle = AlurPencairanDetailRepository::create($validateData);
+                    }
+                }
+            });
+            $this->getJumlahBelumMelengkapiRekeningSalah();
+            $this->getJumlahBelumTransferSusulan();
+
+            $this->getDataSalahTransfer();
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Data Berhasil Diperbarui",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+    public function saveMelengkapiRekeningSalah()
+    {
+        try {
+            DB::transaction(function () {
+                $this->dispatch('consoleLog', $this->data_salah_transfers);
+                foreach ($this->data_salah_transfers as $data_tranfer) {
+                    if ($data_tranfer['rekening_terbaru'] !== $data_tranfer['rekening_terbaru_old']) {
+                        $validateData = [
+                            'rekening_terbaru' => blank($data_tranfer['rekening_terbaru']) ? null : $data_tranfer['rekening_terbaru'],
+                            'rekening_terbaru_updated_by' => Auth::user()->id,
+                            'rekening_terbaru_updated_at' => now(),
+                            // 'mata_uang' => $data_tranfer['mata_uang'],
+                        ];
+                        if ($data_tranfer['id']) {
+                            # code...
+                            $vehicle = AlurPencairanDetailRepository::update($data_tranfer['id'], $validateData);
+                        }
+                    }
+                }
+
+                $this->getJumlahBelumMelengkapiRekeningSalah();
+                $this->getJumlahBelumTransferSusulan();
+            });
+            $this->getDataSalahTransfer();
+
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Data Berhasil Diperbarui",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+    public function saveTransferSusulan()
+    {
+        try {
+            DB::transaction(function () {
+                $this->dispatch('consoleLog', $this->data_salah_transfers);
+                foreach ($this->data_salah_transfers as $data_tranfer) {
+                    if ($data_tranfer['tanggal_transfer'] != $data_tranfer['tanggal_transfer_old']) {
+                        $validateData = [
+                            'tanggal_transfer' => blank($data_tranfer['tanggal_transfer']) ? null : $data_tranfer['tanggal_transfer'],
+                            'tanggal_transfer_updated_by' => Auth::user()->id,
+                            'tanggal_transfer_updated_at' => now(),
+                        ];
+                        if ($data_tranfer['id']) {
+                            # code...
+                            $vehicle = AlurPencairanDetailRepository::update($data_tranfer['id'], $validateData);
+                        }
+                    }
+                }
+
+                $this->getJumlahBelumMelengkapiRekeningSalah();
+                $this->getJumlahBelumTransferSusulan();
+            });
+
+            $this->getDataSalahTransfer();
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Data Berhasil Diperbarui",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+
+    public function addDataSalahTransfer()
+    {
+        $this->data_salah_transfers[] = [
+            'id' => '',
+            'no_input_jepang' => '',
+            'nama_lengkap' => '',
+            'tanggal_lahir' => '',
+            'nominal_cair' => '',
+            'rekening_terbaru' => '',
+            'tanggal_transfer' => '',
+            'mata_uang' => AlurPencairanDetail::CURRENCY_RUPIAH,
+            'updator_rekening_terbaru_name' => '',
+            'updator_tanggal_transfer_name' => '',
+        ];
+    }
+
+    public function removeDataTransfer($index)
+    {
+        if ($this->data_salah_transfers[$index]['id']) {
+            $this->data_transfer_removes[] = $this->data_salah_transfers[$index]['id'];
+        }
+        unset($this->data_salah_transfers[$index]);
+    }
+
+    public function saveChanges()
+    {
+        try {
+            DB::transaction(function () {
+                foreach ($this->alur_proseses as $index => $alur_proses) {
+                    if ($alur_proses['keterangan'] != $alur_proses['keterangan_old']) {
+                        $validatedData = [
+
+                            'alur_pencairan_id' => $alur_proses['alur_pencairan_id'],
+                            'alur_pencairan_alur_proses_id' => $alur_proses['alur_pencairan_alur_proses_id'],
+                            'role_id' => Auth::user()->roles[0]->id,
+                            'nama_karyawan' => Auth::user()->name,
+                            'keterangan' => $alur_proses['keterangan'],
+                            'status' => $alur_proses['status'],
+                        ];
+                        AlurPencairanHistoryRepository::create($validatedData);
+                        $this->editAlurPencairan(Crypt::encrypt($alur_proses['alur_pencairan_id']));
+                    }
+                }
+            });
+
+
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Data Berhasil Diperbarui",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+
+    public function updateStatus($alur_pencairan_id)
+    {
+        try {
+            DB::transaction(function () use ($alur_pencairan_id) {
+                AlurPencairanRepository::update($alur_pencairan_id, ['status' => AlurPencairan::STATUS_DONE]);
+                $this->editAlurPencairan(Crypt::encrypt($alur_pencairan_id));
+            });
+
+
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Data Berhasil Diperbarui",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+
+    public function updatedAlurProseses($a, $b)
+    {
+        try {
+            $el = explode('.', $b);
+            if ($el[1] == 'is_check') {
+                DB::transaction(function () use ($el) {
+
+                    $alur_proses = $this->alur_proseses[$el[0]];
+                    $status = $alur_proses['is_check'] ? AlurPencairanHistory::STATUS_DONE : AlurPencairanHistory::STATUS_CANCEL;
+
+                    $validatedData = [
+                        'alur_pencairan_id' => $alur_proses['alur_pencairan_id'],
+                        'alur_pencairan_alur_proses_id' => $alur_proses['alur_pencairan_alur_proses_id'],
+                        'role_id' => Auth::user()->roles[0]->id,
+                        'nama_karyawan' => Auth::user()->name,
+                        'status' => $status,
+                        'keterangan' => $alur_proses['keterangan'],
+                    ];
+
+
+                    AlurPencairanHistoryRepository::create($validatedData);
+                    $this->editAlurPencairan(Crypt::encrypt($alur_proses['alur_pencairan_id']));
+                });
+
+
+                DB::commit();
+                Alert::confirmation(
+                    $this,
+                    Alert::ICON_SUCCESS,
+                    "Berhasil",
+                    "Data Berhasil Diperbarui",
+                    "on-dialog-confirm",
+                    "on-dialog-cancel",
+                    "Oke",
+                    "Tutup",
+                );
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+
+    public function updatedDataTransfers($a, $b)
+    {
+        try {
+            DB::transaction(function () use ($b) {
+
+                $index = explode('.', $b)[0];
+                $data_salah_transfers = $this->data_salah_transfers[$index];
+                $status = $data_salah_transfers['is_check'] ? AlurPencairanDetail::STATUS_DONE : AlurPencairanDetail::STATUS_PROSES;
+
+                $validatedData = [
+                    'status' => $status,
+                ];
+
+                AlurPencairanDetailRepository::update($data_salah_transfers['id'], $validatedData);
+                $this->editAlurPencairan(Crypt::encrypt($data_salah_transfers['alur_pencairan_id']));
+            });
+
+
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Data Berhasil Diperbarui",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.alur-pencairan.alur-pencairan.edit');
+    }
+}
