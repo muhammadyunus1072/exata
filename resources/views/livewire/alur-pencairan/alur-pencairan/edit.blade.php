@@ -89,7 +89,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -119,7 +119,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -149,7 +149,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -179,7 +179,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -209,7 +209,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -239,7 +239,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_CC])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -269,7 +269,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_CC])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -299,7 +299,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_CC])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -329,7 +329,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -359,7 +359,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -389,7 +389,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -419,7 +419,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -449,7 +449,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -479,7 +479,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -501,7 +501,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -664,7 +664,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -823,7 +823,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -982,7 +982,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1012,7 +1012,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1042,7 +1042,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_SALES])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1072,7 +1072,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_SALES])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1102,7 +1102,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1132,7 +1132,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1162,7 +1162,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1192,7 +1192,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
@@ -1222,7 +1222,7 @@
                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                                         <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$no - 2}}.keterangan" placeholder="-- ISI --">
                                                     @else
-                                                        <p class="form-control py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
+                                                        <p class="py-0">{{$alur_proseses[$no - 2]['keterangan']}}</p>
                                                     @endIf
                                                 </td>
                                             </tr>
