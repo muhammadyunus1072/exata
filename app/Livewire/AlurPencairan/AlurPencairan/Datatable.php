@@ -4,6 +4,7 @@ namespace App\Livewire\AlurPencairan\AlurPencairan;
 
 use App\Helpers\Alert;
 use App\Helpers\PermissionHelper;
+use App\Models\AlurPencairan\AlurPencairanStatus;
 use App\Repositories\Account\UserRepository;
 use App\Repositories\AlurPencairan\AlurPencairanRepository;
 use App\Traits\Livewire\WithDatatable;
@@ -126,6 +127,35 @@ class Datatable extends Component
             [
                 'key' => 'judul',
                 'name' => 'Judul',
+            ],
+            [
+                'sortable' => false,
+                'searchable' => false,
+                'key' => 'status',
+                'name' => 'Progress Status',
+                'render' => function ($item) {
+                    $alur_proseses = [];
+                    foreach ($item->AlurPencairanStatuses as $alur_proses) {
+                        $alur_proseses[] = [
+                            'name' => $alur_proses->AlurPencairanAlurProses->name . ' oleh : ' . $alur_proses->AlurPencairanAlurProses->role->name,
+                            'status' => $alur_proses->status == AlurPencairanStatus::STATUS_DONE ? true : false,
+                        ];
+                    }
+
+                    $html = '<td class="text-center">
+    <div class="d-flex justify-content-center gap-1">';
+                    foreach ($alur_proseses as $proses) {
+                        $html .= '<span
+                class="progress-box ' . ($proses['status'] ? 'bg-success' : 'bg-danger') . '"
+                data-bs-toggle="tooltip"
+                title="' . $proses['name'] . '"
+            ></span>';
+                    }
+
+                    $html .= '</div>
+</td>';
+                    return $html;
+                }
             ],
             [
                 'sortable' => false,

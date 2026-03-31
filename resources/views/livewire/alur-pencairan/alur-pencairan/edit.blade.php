@@ -1209,6 +1209,13 @@
         .animate-wand {
             animation: pulse-wand 1s infinite ease-in-out;
         }
+        .progress-box {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            display: inline-block;
+            cursor: pointer;
+        }
     </style>
 @endpush
 
@@ -1231,4 +1238,18 @@
 
         });
     </script>
+    <script>
+        function initTooltip() {
+            const tooltipTriggerList =
+                [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+
+            tooltipTriggerList.map(function (el) {
+                return new bootstrap.Tooltip(el);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initTooltip);
+        document.addEventListener('livewire:load', initTooltip);
+        document.addEventListener('livewire:navigated', initTooltip);
+</script>
 @endpush
