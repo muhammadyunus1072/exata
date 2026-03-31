@@ -455,7 +455,8 @@
                                                 <td>Finance</td> 
                                                 <td>Info Rek Salah (Mencatat list nama yang blm berhasil di Transfer (rek mondai dll))</td>
                                                 <td class="d-flex justify-content-center">
-                                                    
+                                                     <input 
+                                                    class="form-check-input" type="checkbox" checked disabled>
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}"><p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p></p>
