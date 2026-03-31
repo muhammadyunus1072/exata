@@ -37,7 +37,7 @@ return new class extends Migration
 
         $table->bigInteger('role_id');
         $table->text('name');
-        $table->integer('nomor_urut');
+        $table->string('nomor_urut');
 
         $table->bigInteger("created_by")->unsigned()->nullable();
         $table->bigInteger("updated_by")->unsigned()->nullable();

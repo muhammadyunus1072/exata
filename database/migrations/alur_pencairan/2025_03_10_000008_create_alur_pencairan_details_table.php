@@ -39,7 +39,7 @@ return new class extends Migration
         $table->string('no_input_jepang');
         $table->string('nama_lengkap');
         $table->date('tanggal_lahir');
-        $table->double('nominal_cair', 10, 2);
+        $table->double('nominal_cair', 20, 2);
 
         $table->bigInteger("created_by")->unsigned()->nullable();
         $table->bigInteger("updated_by")->unsigned()->nullable();

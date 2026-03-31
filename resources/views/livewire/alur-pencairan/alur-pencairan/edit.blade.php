@@ -62,11 +62,17 @@
                                                 <td>Pak Novi</td> 
                                                 <td>Terima email dari pusat dan share ke accounting exata</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -84,11 +90,17 @@
                                                 <td>Acc Exata</td> 
                                                 <td>Share list cair ke HS </td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -106,11 +118,17 @@
                                                 <td>Acc Exata</td> 
                                                 <td>Share list cair ke Finance u blok 01  tarik data</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -128,11 +146,17 @@
                                                 <td>HS</td> 
                                                 <td>Melengkapi Rekening Kosong </td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -150,11 +174,17 @@
                                                 <td>HS</td> 
                                                 <td>Share list cair ke CC</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -172,11 +202,17 @@
                                                 <td>CC</td> 
                                                 <td>Kirim gambar list cair u di posting sales</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_CC] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_CC]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -194,11 +230,17 @@
                                                 <td>CC</td> 
                                                 <td>Kirim Konten N20% Cair u di posting sales</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_CC] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_CC]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -216,11 +258,17 @@
                                                 <td>CC</td> 
                                                 <td>Kirim ichijikin ke sales </td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_CC] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_CC]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -238,11 +286,17 @@
                                                 <td>Acc Exata</td> 
                                                 <td>Hitung, buat & Share kwitansi ke sales</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -260,11 +314,17 @@
                                                 <td>Acc Exata</td> 
                                                 <td>Cek & Print list cai</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -282,11 +342,17 @@
                                                 <td>Pak Novi</td> 
                                                 <td>Transaksi ke Bank </td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -304,11 +370,17 @@
                                                 <td>Pak Novi</td> 
                                                 <td>Transfer </td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -326,11 +398,17 @@
                                                 <td>Pak Novi</td> 
                                                 <td>Info ke Tim / Grup selesai Transfer</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -348,11 +426,17 @@
                                                 <td>Finance</td> 
                                                 <td>Mutasi transfer</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -390,7 +474,7 @@
 
                                                     <div
                                                         id="data-salah-transfer"
-                                                        class="collapse"
+                                                        class="collapse auto-close-collapse"
                                                         wire:ignore.self
                                                     >
                                                         <div class="p-3 bg-light">
@@ -551,7 +635,7 @@
 
                                                     <div
                                                         id="melengkapi-rekening-salah"
-                                                        class="collapse"
+                                                        class="collapse auto-close-collapse"
                                                         wire:ignore.self
                                                     >
                                                         <div class="p-3 bg-light">
@@ -708,7 +792,7 @@
 
                                                     <div
                                                         id="transfer-susulan"
-                                                        class="collapse"
+                                                        class="collapse auto-close-collapse"
                                                         wire:ignore.self
                                                     >
                                                         <div class="p-3 bg-light">
@@ -836,11 +920,17 @@
                                                 <td>Pak Novi</td> 
                                                 <td>Info ke Tim / Grup selesai Transfer susulan</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -858,11 +948,17 @@
                                                 <td>Finance</td> 
                                                 <td>Mutasi ulang susulan</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -880,11 +976,17 @@
                                                 <td>Sales</td> 
                                                 <td>Posting konten</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_SALES] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_SALES]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -902,11 +1004,17 @@
                                                 <td>Sales</td> 
                                                 <td>Kirim info Nenkin cair, kirim link u lihat Kwitansi + Ichijikin</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_SALES] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_SALES]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -924,11 +1032,17 @@
                                                 <td>HS</td> 
                                                 <td>Upod & Testimoni</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -946,11 +1060,17 @@
                                                 <td>Finance</td> 
                                                 <td>Cek Kwitansi yang di kirim sales</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -968,11 +1088,17 @@
                                                 <td>Finance</td> 
                                                 <td>Arsip Resi Transfer</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -990,11 +1116,17 @@
                                                 <td>Finance</td> 
                                                 <td>Blok & isi nominal cair + tanggal cair</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -1012,11 +1144,17 @@
                                                 <td>Acc Exata</td> 
                                                 <td>Arsip print out list cair beserta slip transaksi bank</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <input 
-                                                    {{ (Auth::user()->roles[0]->name == 
+                                                    @if(
+                                                        Auth::user()->roles[0]->name == 
                                                     App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA] ? '' : 'disabled') }}
+                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA]
+                                                    ) 
+                                                    <input 
                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 2}}.is_check">
+                                                    @else 
+                                                    <input 
+                                                    class="form-check-input" type="checkbox" {{$alur_proseses[$no - 2]['is_check'] ? 'checked' : ''}} disabled>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <p class="{{$alur_proseses[$no - 2]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$no - 2]['tanggal_update']}} {{$alur_proseses[$no -2]['creator_name']}}</p>
@@ -1072,4 +1210,25 @@
             animation: pulse-wand 1s infinite ease-in-out;
         }
     </style>
+@endpush
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+
+            $('#editModal').on('hidden.bs.modal', function () {
+                closeCollapse();
+            });
+            Livewire.on('closeEditModal', (res) => {
+                $('#editModal').modal('hide');
+                closeCollapse();
+                Livewire.dispatch('refresh-table');
+            });
+
+            function closeCollapse(){
+                $('.auto-close-collapse').collapse('hide');
+            }
+
+        });
+    </script>
 @endpush

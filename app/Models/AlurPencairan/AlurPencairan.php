@@ -180,8 +180,9 @@ class AlurPencairan extends Model
     public function AlurPencairanDetailOnProses()
     {
         return $this->hasMany(AlurPencairanDetail::class, 'alur_pencairan_id', 'id')
-            // ->where('rekening_terbaru', '!=', AlurPencairanDetail::STATUS_DONE);
-            ->whereNull('rekening_terbaru')
-            ->orWhereNull('tanggal_transfer');
+            ->where(function ($query) {
+                $query->whereNull('rekening_terbaru')
+                    ->orWhereNull('tanggal_transfer');
+            });
     }
 }

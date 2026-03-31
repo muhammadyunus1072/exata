@@ -73,40 +73,16 @@ class Edit extends Component
         $this->getJumlahBelumTransferSusulan();
     }
 
-    private function getJumlahBelumMelengkapiRekeningSalah()
-    {
-        $this->jumlah_belum_melengkapi_rekening_salah = AlurPencairanDetailRepository::getBy(
-            [
-                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)],
-                ['rekening_terbaru', null],
-            ]
-        )->count();
-    }
-
     #[On('on-dialog-confirm')]
     public function onDialogConfirm()
     {
         $this->editAlurPencairan($this->alur_pencairan_id);
-        $this->getJumlahBelumMelengkapiRekeningSalah();
-        $this->getJumlahBelumTransferSusulan();
     }
 
     #[On('on-dialog-cancel')]
     public function onDialogCancel()
     {
-        $this->editAlurPencairan($this->alur_pencairan_id);
-        $this->getJumlahBelumMelengkapiRekeningSalah();
-        $this->getJumlahBelumTransferSusulan();
-    }
-
-    private function getJumlahBelumTransferSusulan()
-    {
-        $this->jumlah_belum_transfer_susulan = AlurPencairanDetailRepository::getBy(
-            [
-                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)],
-                ['tanggal_transfer', null],
-            ]
-        )->count();
+        $this->dispatch('closeEditModal');
     }
 
     public function getDataSalahTransfer()
@@ -135,11 +111,29 @@ class Edit extends Component
         }
     }
 
+    private function getJumlahBelumMelengkapiRekeningSalah()
+    {
+        $this->jumlah_belum_melengkapi_rekening_salah = AlurPencairanDetailRepository::getBy(
+            [
+                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)],
+                ['rekening_terbaru', null],
+            ]
+        )->count();
+    }
+    private function getJumlahBelumTransferSusulan()
+    {
+        $this->jumlah_belum_transfer_susulan = AlurPencairanDetailRepository::getBy(
+            [
+                ['alur_pencairan_id', Crypt::decrypt($this->alur_pencairan_id)],
+                ['tanggal_transfer', null],
+            ]
+        )->count();
+    }
+
     public function saveDataSalahTransfer()
     {
         try {
             DB::transaction(function () {
-                $this->dispatch('consoleLog', $this->data_salah_transfers);
                 foreach ($this->data_salah_transfers as $data_tranfer) {
 
                     $validateData = [
@@ -186,7 +180,6 @@ class Edit extends Component
     {
         try {
             DB::transaction(function () {
-                $this->dispatch('consoleLog', $this->data_salah_transfers);
                 foreach ($this->data_salah_transfers as $data_tranfer) {
                     if ($data_tranfer['rekening_terbaru'] !== $data_tranfer['rekening_terbaru_old']) {
                         $validateData = [
@@ -227,7 +220,6 @@ class Edit extends Component
     {
         try {
             DB::transaction(function () {
-                $this->dispatch('consoleLog', $this->data_salah_transfers);
                 foreach ($this->data_salah_transfers as $data_tranfer) {
                     if ($data_tranfer['tanggal_transfer'] != $data_tranfer['tanggal_transfer_old']) {
                         $validateData = [
