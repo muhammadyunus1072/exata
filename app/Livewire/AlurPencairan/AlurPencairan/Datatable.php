@@ -138,9 +138,10 @@ class Datatable extends Component
                     foreach ($item->AlurPencairanStatuses as $alur_proses) {
                         $alur_proseses[] = [
                             'name' => $alur_proses->AlurPencairanAlurProses->name . ' oleh : ' . $alur_proses->AlurPencairanAlurProses->role->name,
-                            'status' => $alur_proses->status == AlurPencairanStatus::STATUS_DONE ? true : false,
+                            'status' => $alur_proses->getProgressStatus()
                         ];
                     }
+                    $this->dispatch('consoleLog', $alur_proseses);
 
                     $html = '<td class="text-center">
     <div class="d-flex justify-content-center gap-1">';

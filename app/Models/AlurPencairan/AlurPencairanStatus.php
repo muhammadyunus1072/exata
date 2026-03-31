@@ -30,6 +30,25 @@ class AlurPencairanStatus extends Model
         return true;
     }
 
+    public function getProgressStatus()
+    {
+        switch ($this->alur_pencairan_alur_proses_id) {
+            case 15:
+                return true;
+                break;
+            case 16:
+                return count($this->AlurPencairanDetailBelumMelengkapiRekeningSalah) ? false : true;
+                break;
+            case 17:
+                return count($this->AlurPencairanDetailBelumTransferSusulan) ? false : true;
+                break;
+
+            default:
+                return $this->status  == AlurPencairanStatus::STATUS_DONE ? true : false;
+                break;
+        }
+    }
+
     public function isEditable()
     {
         return true;
@@ -38,5 +57,19 @@ class AlurPencairanStatus extends Model
     public function AlurPencairanAlurProses()
     {
         return $this->belongsTo(AlurPencairanAlurProses::class, 'alur_pencairan_alur_proses_id', 'id');
+    }
+    public function AlurPencairanDetail()
+    {
+        return $this->hasMany(AlurPencairanDetail::class, 'alur_pencairan_id', 'alur_pencairan_id');
+    }
+    public function AlurPencairanDetailBelumMelengkapiRekeningSalah()
+    {
+        return $this->hasMany(AlurPencairanDetail::class, 'alur_pencairan_id', 'alur_pencairan_id')
+            ->where('rekening_terbaru', null);
+    }
+    public function AlurPencairanDetailBelumTransferSusulan()
+    {
+        return $this->hasMany(AlurPencairanDetail::class, 'alur_pencairan_id', 'alur_pencairan_id')
+            ->where('tanggal_transfer', null);
     }
 }
