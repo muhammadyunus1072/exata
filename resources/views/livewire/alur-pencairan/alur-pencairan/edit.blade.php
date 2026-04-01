@@ -31,7 +31,7 @@
                                         <label>Status</label><br>
                                         @if(Auth::user()->roles[0]->name == 
                                             App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
-                                            [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
+                                            [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                             <button type="button" class="btn {{$alur_pencairan['status']== \App\Models\AlurPencairan\AlurPencairan::STATUS_DONE ? 'btn-success' : 'btn-warning'}}" wire:click="updateStatus('{{$alur_pencairan['alur_pencairan_id']}}')">{{$alur_pencairan['status']}}</button>
                                         @else
                                             <button type="button" class="btn {{$alur_pencairan['status']== \App\Models\AlurPencairan\AlurPencairan::STATUS_DONE ? 'btn-success' : 'btn-warning'}}">{{$alur_pencairan['status']}}</button>
