@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'color' => '#3B82F6',
             ]);
 
-            $user->assignRole(AlurPencairan::ROLE_ADMIN);
+            $user->assignRole(AlurPencairan::ROLE_SUPER_ADMIN);
 
 
             $user = User::create([
@@ -142,7 +142,17 @@ class UserSeeder extends Seeder
                 'color' => '#000000',
             ]);
 
-            $user->assignRole(AlurPencairan::ROLE_ADMIN);
+            $user->assignRole(AlurPencairan::ROLE_SUPER_ADMIN);
+
+            $user = User::create([
+                'name' => "Febtio",
+                'username' => "Febtio",
+                'email' => "febtio.exataindonesia2019@gmail.com",
+                'password' => Hash::make("123exata"),
+                'color' => '#000000',
+            ]);
+
+            $user->assignRole(AlurPencairan::ROLE_SUPERVISOR);
 
             // PAK NOVI
             $user = User::create([
@@ -158,7 +168,7 @@ class UserSeeder extends Seeder
 
             // ACC EXATA
             $user = User::create([
-                'name' => "Nurul - Acc Exata",
+                'name' => "Nurul",
                 'username' => "Nurul",
                 'email' => "nurul.exataindonesia2018@gmail.com",
                 'password' => Hash::make("123exata"),
@@ -170,11 +180,29 @@ class UserSeeder extends Seeder
 
             // HS
             $user = User::create([
-                'name' => "HS",
-                'username' => "HS",
-                'email' => "hs@gmail.com",
+                'name' => "Cynthia",
+                'username' => "Cynthia",
+                'email' => "amin.exataindonesia2021@gmail.com",
                 'password' => Hash::make("123exata"),
                 'color' => '#8B5CF6',
+            ]);
+
+            $user->assignRole(AlurPencairan::ROLE_HS);
+            $user = User::create([
+                'name' => "Mutia",
+                'username' => "Mutia",
+                'email' => "internship.exatagroup05@gmail.com",
+                'password' => Hash::make("123exata"),
+                'color' => '#64748B',
+            ]);
+
+            $user->assignRole(AlurPencairan::ROLE_HS);
+            $user = User::create([
+                'name' => "Vita",
+                'username' => "Vita",
+                'email' => "dira.exataindonesia2018@gmail.com",
+                'password' => Hash::make("123exata"),
+                'color' => '#A855F7',
             ]);
 
             $user->assignRole(AlurPencairan::ROLE_HS);
@@ -183,19 +211,19 @@ class UserSeeder extends Seeder
             // CONTENT CREATOR
             $user = User::create([
                 'name' => "Teddy",
-                'username' => "Teddy - Content Creator",
+                'username' => "Teddy",
                 'email' => "teddy.exata@gmail.com",
                 'password' => Hash::make("123exata"),
-                'color' => '#8B5CF6',
+                'color' => '#EC4899',
             ]);
 
             $user->assignRole(AlurPencairan::ROLE_CC);
             $user = User::create([
                 'name' => "Irfan",
-                'username' => "Irfan - Content Creator",
+                'username' => "Irfan",
                 'email' => "arik.exataindonesia2019@gmail.com",
                 'password' => Hash::make("suksesbersamaexata1"),
-                'color' => '#EC4899',
+                'color' => '#F43F5E',
             ]);
 
             $user->assignRole(AlurPencairan::ROLE_CC);
@@ -204,10 +232,10 @@ class UserSeeder extends Seeder
             // FINANCE
             $user = User::create([
                 'name' => "Rina",
-                'username' => "Rina - Finance",
+                'username' => "Rina",
                 'email' => "rinaexataindonesia@gmail.com",
                 'password' => Hash::make("123exata"),
-                'color' => '#F43F5E',
+                'color' => '#EF4444',
             ]);
 
             $user->assignRole(AlurPencairan::ROLE_FINANCE);
@@ -218,7 +246,7 @@ class UserSeeder extends Seeder
                 'username' => "Mukhamad Turhamun",
                 'email' => "kim.exataindonesia2018@gmail.com",
                 'password' => Hash::make("SuksesBersama2620"),
-                'color' => '#F43F5E',
+                'color' => '#F97316',
             ]);
             $user->assignRole(AlurPencairan::ROLE_SALES);
 
@@ -227,7 +255,16 @@ class UserSeeder extends Seeder
                 'username' => "Selamet Syafaruddin",
                 'email' => "eza.exataindonesia2018@gmail.com",
                 'password' => Hash::make("@Sukses2026Bisa"),
-                'color' => '#EF4444',
+                'color' => '#FB923C',
+            ]);
+
+            $user->assignRole(AlurPencairan::ROLE_SALES);
+            $user = User::create([
+                'name' => "Ainul",
+                'username' => "Ainul",
+                'email' => "ajmain.exataindonesia2018@gmail.com",
+                'password' => Hash::make("@Sukses2026Bisa"),
+                'color' => '#eada67',
             ]);
 
             $user->assignRole(AlurPencairan::ROLE_SALES);
