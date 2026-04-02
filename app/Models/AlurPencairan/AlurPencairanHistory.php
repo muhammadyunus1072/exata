@@ -19,6 +19,10 @@ class AlurPencairanHistory extends Model
         'nama_karyawan',
         'status',
         'keterangan',
+
+        'is_multi',
+        'user_id',
+        'user_name',
     ];
 
     protected $guarded = ['id'];
@@ -48,6 +52,9 @@ class AlurPencairanHistory extends Model
                 [
                     'alur_pencairan_id' => $model->alur_pencairan_id,
                     'alur_pencairan_alur_proses_id' => $model->alur_pencairan_alur_proses_id,
+                    'is_multi' => $model->is_multi,
+                    'user_id' => $model->user_id,
+                    'user_name' => $model->user_name,
                 ],
                 [
                     'status' => $model->status,

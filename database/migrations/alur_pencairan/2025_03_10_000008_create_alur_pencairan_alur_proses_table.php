@@ -38,6 +38,7 @@ return new class extends Migration
         $table->bigInteger('role_id');
         $table->text('name');
         $table->string('nomor_urut');
+        $table->boolean('is_multi');
 
         $table->bigInteger("created_by")->unsigned()->nullable();
         $table->bigInteger("updated_by")->unsigned()->nullable();

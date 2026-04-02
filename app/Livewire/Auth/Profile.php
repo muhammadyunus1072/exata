@@ -17,6 +17,7 @@ class Profile extends Component
 
     public $email;
     public $role;
+    public $color;
 
     public $oldPassword;
     public $password;
@@ -27,6 +28,7 @@ class Profile extends Component
         $user = UserRepository::authenticatedUser();
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->color = $user->color;
         $this->role = $user->roles[0]->name;
     }
 
@@ -38,6 +40,7 @@ class Profile extends Component
 
         $validatedData = [
             'name' => $this->name,
+            'color' => $this->color,
         ];
 
         if (!empty($this->oldPassword) || !empty($this->password) || !empty($this->retypePassword)) {

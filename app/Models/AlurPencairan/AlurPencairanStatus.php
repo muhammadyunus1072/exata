@@ -2,6 +2,7 @@
 
 namespace App\Models\AlurPencairan;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,10 @@ class AlurPencairanStatus extends Model
         'alur_pencairan_alur_proses_id',
         'status',
         'keterangan',
+
+        'is_multi',
+        'user_id',
+        'user_name',
     ];
 
     const STATUS_PENDING = 'pending';
@@ -33,13 +38,13 @@ class AlurPencairanStatus extends Model
     public function getProgressStatus()
     {
         switch ($this->alur_pencairan_alur_proses_id) {
-            case 15:
+            case 16:
                 return true;
                 break;
-            case 16:
+            case 17:
                 return count($this->AlurPencairanDetailBelumMelengkapiRekeningSalah) ? false : true;
                 break;
-            case 17:
+            case 18:
                 return count($this->AlurPencairanDetailBelumTransferSusulan) ? false : true;
                 break;
 
@@ -52,6 +57,11 @@ class AlurPencairanStatus extends Model
     public function isEditable()
     {
         return true;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function AlurPencairanAlurProses()

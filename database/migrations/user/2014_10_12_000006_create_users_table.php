@@ -41,6 +41,7 @@ return new class extends Migration
         $table->string('email');
         $table->string('username');
         $table->string('password');
+        $table->string('color');
         $table->datetime('email_verified_at')->nullable()->default(null);
         $table->rememberToken();
 

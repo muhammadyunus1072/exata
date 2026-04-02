@@ -67,6 +67,9 @@ class Edit extends Component
                 'keterangan' => $detail['keterangan'],
                 // 'keterangan' => "HALO",
                 'keterangan_old' => $detail['keterangan'],
+                'is_multi' => $detail['is_multi'],
+                'user_id' => $detail['user_id'],
+                'user_name' => $detail['user_name'],
             ];
         }
         $this->getJumlahBelumMelengkapiRekeningSalah();
@@ -100,11 +103,15 @@ class Edit extends Component
                 'nama_lengkap' => $detail['nama_lengkap'],
                 'tanggal_lahir' => $detail['tanggal_lahir'],
                 'nominal_cair' => $detail['nominal_cair'],
+                'rekening_lama' => $detail['rekening_lama'],
+                'jenis_rekening_lama' => $detail['jenis_rekening_lama'],
                 'rekening_terbaru' => $detail['rekening_terbaru'],
-                'tanggal_transfer' => $detail['tanggal_transfer'],
                 'rekening_terbaru_old' => $detail['rekening_terbaru'],
+                'jenis_rekening_terbaru' => $detail['jenis_rekening_terbaru'],
+                'jenis_rekening_terbaru_old' => $detail['jenis_rekening_terbaru'],
+                'tanggal_transfer' => $detail['tanggal_transfer'],
                 'tanggal_transfer_old' => $detail['tanggal_transfer'],
-                'creator_name' => $detail['creator']['name'],
+                'creator_name' => $detail['creator']['name'] . " pada: " . $detail['created_at'],
                 'updator_rekening_terbaru_name' => $detail['updator_rekening_terbaru'] ? $detail['updator_rekening_terbaru']['name'] : '',
                 'updator_tanggal_transfer_name' => $detail['updator_tanggal_transfer'] ? $detail['updator_tanggal_transfer']['name'] : '',
             ];
@@ -140,6 +147,9 @@ class Edit extends Component
                         'alur_pencairan_id' => Crypt::decrypt($this->alur_pencairan_id),
                         'no_input_jepang' => $data_tranfer['no_input_jepang'],
                         'nama_lengkap' => $data_tranfer['nama_lengkap'],
+                        'rekening_lama' => $data_tranfer['rekening_lama'],
+                        'jenis_rekening_lama' => $data_tranfer['jenis_rekening_lama'],
+                        'jenis_rekening_terbaru' => $data_tranfer['jenis_rekening_terbaru'],
                         'tanggal_lahir' => $data_tranfer['tanggal_lahir'],
                         'nominal_cair' => $data_tranfer['nominal_cair'],
                         'status' => AlurPencairanDetail::STATUS_PROSES,
@@ -181,9 +191,10 @@ class Edit extends Component
         try {
             DB::transaction(function () {
                 foreach ($this->data_salah_transfers as $data_tranfer) {
-                    if ($data_tranfer['rekening_terbaru'] !== $data_tranfer['rekening_terbaru_old']) {
+                    if (($data_tranfer['rekening_terbaru'] !== $data_tranfer['rekening_terbaru_old']) || ($data_tranfer['jenis_rekening_terbaru'] !== $data_tranfer['jenis_rekening_terbaru_old'])) {
                         $validateData = [
                             'rekening_terbaru' => blank($data_tranfer['rekening_terbaru']) ? null : $data_tranfer['rekening_terbaru'],
+                            'jenis_rekening_terbaru' => $data_tranfer['jenis_rekening_terbaru'],
                             'rekening_terbaru_updated_by' => Auth::user()->id,
                             'rekening_terbaru_updated_at' => now(),
                             // 'mata_uang' => $data_tranfer['mata_uang'],
@@ -264,9 +275,11 @@ class Edit extends Component
             'nama_lengkap' => '',
             'tanggal_lahir' => '',
             'nominal_cair' => '',
+            'rekening_lama' => '',
+            'jenis_rekening_lama' => AlurPencairanDetail::JENIS_REKENING_INDONESIA,
             'rekening_terbaru' => '',
+            'jenis_rekening_terbaru' => AlurPencairanDetail::JENIS_REKENING_INDONESIA,
             'tanggal_transfer' => '',
-            'mata_uang' => AlurPencairanDetail::CURRENCY_RUPIAH,
             'updator_rekening_terbaru_name' => '',
             'updator_tanggal_transfer_name' => '',
         ];
@@ -294,6 +307,9 @@ class Edit extends Component
                             'nama_karyawan' => Auth::user()->name,
                             'keterangan' => $alur_proses['keterangan'],
                             'status' => $alur_proses['status'],
+                            'is_multi' => $alur_proses['is_multi'],
+                            'user_id' => $alur_proses['user_id'],
+                            'user_name' => $alur_proses['user_name'],
                         ];
                         AlurPencairanHistoryRepository::create($validatedData);
                         $this->editAlurPencairan(Crypt::encrypt($alur_proses['alur_pencairan_id']));
@@ -357,6 +373,9 @@ class Edit extends Component
 
                     $validatedData = [
                         'alur_pencairan_id' => $alur_proses['alur_pencairan_id'],
+                        'is_multi' => $alur_proses['is_multi'],
+                        'user_id' => $alur_proses['user_id'],
+                        'user_name' => $alur_proses['user_name'],
                         'alur_pencairan_alur_proses_id' => $alur_proses['alur_pencairan_alur_proses_id'],
                         'role_id' => Auth::user()->roles[0]->id,
                         'nama_karyawan' => Auth::user()->name,
@@ -382,41 +401,6 @@ class Edit extends Component
                     "Tutup",
                 );
             }
-        } catch (Exception $e) {
-            DB::rollBack();
-            Alert::fail($this, "Gagal", $e->getMessage());
-        }
-    }
-
-    public function updatedDataTransfers($a, $b)
-    {
-        try {
-            DB::transaction(function () use ($b) {
-
-                $index = explode('.', $b)[0];
-                $data_salah_transfers = $this->data_salah_transfers[$index];
-                $status = $data_salah_transfers['is_check'] ? AlurPencairanDetail::STATUS_DONE : AlurPencairanDetail::STATUS_PROSES;
-
-                $validatedData = [
-                    'status' => $status,
-                ];
-
-                AlurPencairanDetailRepository::update($data_salah_transfers['id'], $validatedData);
-                $this->editAlurPencairan(Crypt::encrypt($data_salah_transfers['alur_pencairan_id']));
-            });
-
-
-            DB::commit();
-            Alert::confirmation(
-                $this,
-                Alert::ICON_SUCCESS,
-                "Berhasil",
-                "Data Berhasil Diperbarui",
-                "on-dialog-confirm",
-                "on-dialog-cancel",
-                "Oke",
-                "Tutup",
-            );
         } catch (Exception $e) {
             DB::rollBack();
             Alert::fail($this, "Gagal", $e->getMessage());

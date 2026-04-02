@@ -16,6 +16,7 @@ class AlurPencairanAlurProsesSeeder extends Seeder
             $data = [
                 'role_id'     => $alur_proses['role_id'],
                 'name'        => $alur_proses['name'],
+                'is_multi'        => $alur_proses['is_multi'],
                 'nomor_urut'  => $key + 1,
             ];
 

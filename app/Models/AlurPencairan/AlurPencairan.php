@@ -23,12 +23,12 @@ class AlurPencairan extends Model
     ];
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_PAK_NOVI = 'Pak Novi';
-    const ROLE_ACC_EXATA = 'ACC Exata';
+    const ROLE_PAK_NOVI = 'PAK NOVI';
+    const ROLE_ACC_EXATA = 'ACC EXATA';
     const ROLE_HS = 'HS';
     const ROLE_CC = 'CC';
-    const ROLE_FINANCE = 'Finance';
-    const ROLE_SALES = 'Sales';
+    const ROLE_FINANCE = 'FINANCE';
+    const ROLE_SALES = 'SALES';
 
 
     // @foreach ($alur_proseses as $index_proses => $proses)
@@ -113,13 +113,13 @@ class AlurPencairan extends Model
     //     </table>
     // </div>
     const ROLE_ALIASE = [
-        self::ROLE_ADMIN => 'Admin',
-        self::ROLE_PAK_NOVI => 'Pak Novi',
-        self::ROLE_ACC_EXATA => 'Acc Exata',
+        self::ROLE_ADMIN => 'ADMIN',
+        self::ROLE_PAK_NOVI => 'PAK NOVI',
+        self::ROLE_ACC_EXATA => 'ACC EXATA',
         self::ROLE_HS => 'HS',
         self::ROLE_CC => 'CC',
-        self::ROLE_FINANCE => 'Finance',
-        self::ROLE_SALES => 'Sales',
+        self::ROLE_FINANCE => 'FINANCE',
+        self::ROLE_SALES => 'SALES',
     ];
 
     const STATUS_PROSES = 'proses';
@@ -146,13 +146,32 @@ class AlurPencairan extends Model
         self::created(function ($model) {
             $alur_pencairan_alur_proseses = AlurPencairanAlurProsesRepository::all();
             foreach ($alur_pencairan_alur_proseses as $alur_proses) {
-                AlurPencairanHistoryRepository::create([
-                    'alur_pencairan_id' => $model->id,
-                    'role_id' => Auth::user()->roles[0]->id,
-                    'nama_karyawan' => Auth::user()->name,
-                    'status' => AlurPencairanStatus::STATUS_PENDING,
-                    'alur_pencairan_alur_proses_id' => $alur_proses->id
-                ]);
+                if ($alur_proses->is_multi) {
+
+                    foreach (\Spatie\Permission\Models\Role::findById($alur_proses->role_id)->users as $index => $user) {
+                        AlurPencairanHistoryRepository::create([
+                            'alur_pencairan_id' => $model->id,
+                            'role_id' => Auth::user()->roles[0]->id,
+                            'nama_karyawan' => Auth::user()->name,
+                            'status' => AlurPencairanStatus::STATUS_PENDING,
+                            'alur_pencairan_alur_proses_id' => $alur_proses->id,
+                            'is_multi' => true,
+                            'user_id' => $user->id,
+                            'user_name' => $user->name,
+                        ]);
+                    }
+                } else {
+                    AlurPencairanHistoryRepository::create([
+                        'alur_pencairan_id' => $model->id,
+                        'role_id' => Auth::user()->roles[0]->id,
+                        'nama_karyawan' => Auth::user()->name,
+                        'status' => AlurPencairanStatus::STATUS_PENDING,
+                        'alur_pencairan_alur_proses_id' => $alur_proses->id,
+                        'is_multi' => false,
+                        'user_id' => \Spatie\Permission\Models\Role::findById($alur_proses->role_id)->users[0]->id,
+                        'user_name' => \Spatie\Permission\Models\Role::findById($alur_proses->role_id)->users[0]->name,
+                    ]);
+                }
             }
         });
     }

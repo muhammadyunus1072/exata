@@ -36,10 +36,20 @@ return new class extends Migration
         }
 
         $table->bigInteger('alur_pencairan_id');
-        $table->string('no_input_jepang');
-        $table->string('nama_lengkap');
-        $table->date('tanggal_lahir');
-        $table->double('nominal_cair', 20, 2);
+        $table->string('no_input_jepang')->nullable();
+        $table->string('rekening_lama')->nullable();
+        $table->string('jenis_rekening_lama')->nullable();
+        $table->string('nama_lengkap')->nullable();
+        $table->date('tanggal_lahir')->nullable();
+        $table->double('nominal_cair', 20, 2)->nullable();
+        $table->string('status')->nullable();
+        $table->string('rekening_terbaru')->nullable();
+        $table->string('jenis_rekening_terbaru')->nullable();
+        $table->bigInteger("rekening_terbaru_updated_by")->unsigned()->nullable();
+        $table->dateTime("rekening_terbaru_updated_at")->nullable();
+        $table->date('tanggal_transfer')->nullable();
+        $table->bigInteger("tanggal_transfer_updated_by")->unsigned()->nullable();
+        $table->dateTime("tanggal_transfer_updated_at")->nullable();
 
         $table->bigInteger("created_by")->unsigned()->nullable();
         $table->bigInteger("updated_by")->unsigned()->nullable();

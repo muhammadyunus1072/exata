@@ -27,6 +27,7 @@ class AlurPencairanAlurProses extends Model
     const ALUR_KIRIM_GAMBAR_LIST_CAIR_U_DIPOSTING_SALES = 'kirim_gambar_list_cair_u_diposting_sales';
     const ALUR_KIRIM_KONTEN_N20_CAIR_U_DI_POSTING_SALES = 'kirim_konten_n20_cair_u_di_posting_sales';
     const ALUR_KIRIM_ICHIJIKIN_KE_SALES = 'kirim_ichijikin_ke_sales';
+    const ALUR_PLAN_TRANSFER = 'plan_transfer';
     const ALUR_HITUNG_BUAT_DAN_SHARE_KWITANSI_KE_SALES = 'hitung_buat_dan_share_kwitansi_ke_sales';
     const ALUR_CEK_DAN_PRINT_LIST_CAIR = 'cek_dan_print_list_cair';
     const ALUR_TRANSAKSI_KE_BANK = 'transaksi_ke_bank';
@@ -51,157 +52,190 @@ class AlurPencairanAlurProses extends Model
             'key' => self::ALUR_TERIMA_EMAIL_DARI_PUSAT_DAN_SHARE_KE_ACCOUNTING_EXATA,
             'name' => 'Terima email dari pusat dan share ke accounting exata',
             'role' => AlurPencairan::ROLE_PAK_NOVI,
-            'role_id' => 2
+            'role_id' => 2,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_SHARE_LIST_CAIR_KE_HS,
             'name' => 'Share list cair ke HS ',
             'role' => AlurPencairan::ROLE_ACC_EXATA,
             'role_id' => 3,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_SHARE_LIST_CAIR_KE_FINANCE_U_BLOK_01_TARIK_DATA,
             'name' => 'Share list cair ke Finance u blok 01  tarik data',
             'role' => AlurPencairan::ROLE_ACC_EXATA,
             'role_id' => 3,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_MELENGKAPI_REKENING_KOSONG,
             'name' => 'Melengkapi Rekening Kosong ',
             'role' => AlurPencairan::ROLE_HS,
             'role_id' => 4,
+            'is_multi' => true,
         ],
         [
             'key' => self::ALUR_SHARE_LIST_CAIR_KE_CC,
             'name' => 'Share list cair ke CC',
             'role' => AlurPencairan::ROLE_HS,
             'role_id' => 4,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_KIRIM_GAMBAR_LIST_CAIR_U_DIPOSTING_SALES,
             'name' => 'Kirim gambar list cair u di posting sales',
             'role' => AlurPencairan::ROLE_CC,
             'role_id' => 5,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_KIRIM_KONTEN_N20_CAIR_U_DI_POSTING_SALES,
             'name' => 'Kirim Konten N20% Cair u di posting sales',
             'role' => AlurPencairan::ROLE_CC,
             'role_id' => 5,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_KIRIM_ICHIJIKIN_KE_SALES,
-            'name' => 'Kirim ichijikin ke sales ',
+            'name' => 'Kirim ichijikin ke finance ',
             'role' => AlurPencairan::ROLE_CC,
             'role_id' => 5,
+            'is_multi' => false,
+        ],
+        [
+            'key' => self::ALUR_PLAN_TRANSFER,
+            'name' => 'Plan Transfer',
+            'role' => AlurPencairan::ROLE_ACC_EXATA,
+            'role_id' => 3,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_HITUNG_BUAT_DAN_SHARE_KWITANSI_KE_SALES,
             'name' => 'Hitung, buat & Share kwitansi ke sales',
             'role' => AlurPencairan::ROLE_ACC_EXATA,
             'role_id' => 3,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_CEK_DAN_PRINT_LIST_CAIR,
             'name' => 'Cek & Print list cair',
             'role' => AlurPencairan::ROLE_ACC_EXATA,
             'role_id' => 3,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_TRANSAKSI_KE_BANK,
             'name' => 'Transaksi ke Bank ',
             'role' => AlurPencairan::ROLE_PAK_NOVI,
-            'role_id' => 2
+            'role_id' => 2,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_TRANSFER,
             'name' => 'Transfer',
             'role' => AlurPencairan::ROLE_PAK_NOVI,
-            'role_id' => 2
+            'role_id' => 2,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_INFO_KE_TIM_GRUB_SELESAI_TRANSFER,
             'name' => 'Info ke Tim / Grup selesai Transfer',
             'role' => AlurPencairan::ROLE_PAK_NOVI,
-            'role_id' => 2
+            'role_id' => 2,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_MUTASI_TRANSFER,
             'name' => 'Mutasi transfer',
             'role' => AlurPencairan::ROLE_FINANCE,
             'role_id' => 6,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_INFO_REK_SALAH_MENCATA_LIST_NAMA_YANG_BELUM_BERHASIL_TRANSFER_REK_MONDAI_DLL,
             'name' => 'Info Rek Salah (Mencatat list nama yang blm berhasil di Transfer (rek mondai dll))',
             'role' => AlurPencairan::ROLE_FINANCE,
             'role_id' => 6,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_MELENGKAPI_REKENING_SALAH,
             'name' => 'Melengkapi Rekening salah',
             'role' => AlurPencairan::ROLE_HS,
             'role_id' => 4,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_TRANSFER_SUSULAN,
             'name' => 'Transfer susulan',
             'role' => AlurPencairan::ROLE_PAK_NOVI,
-            'role_id' => 2
+            'role_id' => 2,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_INFO_KE_TIM_GRUB_SELESAI_TRANSFER_SUSULAN,
             'name' => 'Info ke Tim / Grup selesai Transfer susulan',
             'role' => AlurPencairan::ROLE_PAK_NOVI,
-            'role_id' => 2
+            'role_id' => 2,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_MUTASI_ULANG_SUSULAN,
             'name' => 'Mutasi ulang susulan',
             'role' => AlurPencairan::ROLE_FINANCE,
             'role_id' => 6,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_POSTING_KONTEN,
             'name' => 'Posting konten ',
             'role' => AlurPencairan::ROLE_SALES,
-            'role_id' => 7
+            'role_id' => 7,
+            'is_multi' => true,
         ],
         [
             'key' => self::ALUR_KIRIM_INFO_NENKIN_CAIR_KIRIM_LINK_U_LIHAT_KWITANSI_ICHIJIKIN,
-            'name' => 'Kirim info Nenkin cair, kirim link u lihat Kwitansi + Ichijikin',
+            'name' => 'Kirim info Nenkin cair, kirim link u lihat Kwitansi, Ichijikin + Resi',
             'role' => AlurPencairan::ROLE_SALES,
-            'role_id' => 7
+            'role_id' => 7,
+            'is_multi' => true,
         ],
         [
             'key' => self::ALUR_UPOD_DAN_TESTIMONI,
             'name' => 'Upod & Testimoni',
             'role' => AlurPencairan::ROLE_HS,
             'role_id' => 4,
+            'is_multi' => true,
         ],
         [
             'key' => self::ALUR_CEK_KWITANSI_YANG_DIKIRIM_SALES,
             'name' => 'Cek Kwitansi yang di kirim sales',
             'role' => AlurPencairan::ROLE_FINANCE,
             'role_id' => 6,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_ARSIP_RESI_TRANSFER,
             'name' => 'Arsip Resi Transfer',
             'role' => AlurPencairan::ROLE_FINANCE,
             'role_id' => 6,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_BLOK_DAN_ISI_NOMINAL_CAIR_TANGGAL_CAIR,
             'name' => 'Blok & isi nominal cair + tanggal cair',
             'role' => AlurPencairan::ROLE_FINANCE,
             'role_id' => 6,
+            'is_multi' => false,
         ],
         [
             'key' => self::ALUR_ARSIP_PRINT_OUT_LIST_CAIR_BESERTA_SLIP_TRANSAKSI_BANK,
             'name' => 'Arsip print out list cair beserta slip transaksi bank',
             'role' => AlurPencairan::ROLE_ACC_EXATA,
             'role_id' => 3,
+            'is_multi' => false,
         ],
     ];
 

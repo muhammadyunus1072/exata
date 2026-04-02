@@ -23,7 +23,11 @@ class AlurPencairanDetail extends Model
         'tanggal_transfer',
         'mata_uang',
 
+        'rekening_lama',
+        'jenis_rekening_lama',
+
         'rekening_terbaru',
+        'jenis_rekening_terbaru',
         "rekening_terbaru_updated_by",
         "rekening_terbaru_updated_at",
         'tanggal_transfer',
@@ -39,11 +43,11 @@ class AlurPencairanDetail extends Model
         self::STATUS_DONE => 'Done',
     ];
 
-    const CURRENCY_YEN = 'yen';
-    const CURRENCY_RUPIAH = 'rupiah';
-    const CURRENCY_CHOICE = [
-        self::CURRENCY_YEN => 'Yen',
-        self::CURRENCY_RUPIAH => 'Rupiah',
+    const JENIS_REKENING_INDONESIA = 'INDONESIA';
+    const JENIS_REKENING_JEPANG = 'JEPANG';
+    const JENIS_REKENING_CHOICE = [
+        self::JENIS_REKENING_INDONESIA => 'INDONESIA',
+        self::JENIS_REKENING_JEPANG => 'JEPANG',
     ];
 
     protected $guarded = ['id'];

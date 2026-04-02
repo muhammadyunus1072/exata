@@ -35,6 +35,7 @@ return new class extends Migration
         } else {
         }
 
+        $table->date('plan_transfer')->nullable();
         $table->text('judul');
         $table->integer('qty_cair');
         $table->text('keterangan')->nullable();

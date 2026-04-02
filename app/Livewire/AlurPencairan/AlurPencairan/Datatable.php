@@ -4,6 +4,7 @@ namespace App\Livewire\AlurPencairan\AlurPencairan;
 
 use App\Helpers\Alert;
 use App\Helpers\PermissionHelper;
+use App\Models\AlurPencairan\AlurPencairan;
 use App\Models\AlurPencairan\AlurPencairanStatus;
 use App\Repositories\Account\UserRepository;
 use App\Repositories\AlurPencairan\AlurPencairanRepository;
@@ -138,17 +139,22 @@ class Datatable extends Component
                     foreach ($item->AlurPencairanStatuses as $alur_proses) {
                         $alur_proseses[] = [
                             'name' => $alur_proses->AlurPencairanAlurProses->name . ' oleh : ' . $alur_proses->AlurPencairanAlurProses->role->name,
-                            'status' => $alur_proses->getProgressStatus()
+                            'status' => $alur_proses->getProgressStatus(),
+                            'color' => $alur_proses->user->color,
                         ];
                     }
 
-                    $html = '<div class="d-flex justify-content-center gap-1 con">';
-                    foreach ($alur_proseses as $proses) {
+                    $html = '<div class="d-flex justify-content-start gap-1 con mb-2">';
+                    foreach ($alur_proseses as $index => $proses) {
+                        if (ceil(count($alur_proseses) / 2) == $index) {
+                            $html .= '</div>
+                            <div class="d-flex justify-content-start gap-1 con">';
+                        }
                         $html .= '<span
-                            class="progress-box ' . ($proses['status'] ? 'bg-success' : 'bg-danger') . '"
+                            class="progress-box ' . ($proses['status'] ? 'bg-success' : '') . '" style="background-color:' . $proses['color'] . '"
                             data-bs-toggle="tooltip"
                             title="' . $proses['name'] . '"
-                        ></span>';
+                        ><p class="text-center text-light">' . ($index + 1) . '</p></span>';
                     }
 
                     $html .= '</div>';

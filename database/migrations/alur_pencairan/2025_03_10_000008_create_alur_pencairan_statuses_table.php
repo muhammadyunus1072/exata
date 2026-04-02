@@ -37,7 +37,12 @@ return new class extends Migration
 
         $table->bigInteger('alur_pencairan_id');
         $table->bigInteger('alur_pencairan_alur_proses_id');
-        $table->string('status');
+        $table->string('status')->nullable();
+        $table->text('keterangan')->nullable();
+
+        $table->boolean('is_multi')->nullable();
+        $table->bigInteger('user_id')->nullable();
+        $table->string('user_name')->nullable();
 
         $table->bigInteger("created_by")->unsigned()->nullable();
         $table->bigInteger("updated_by")->unsigned()->nullable();

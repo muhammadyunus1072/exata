@@ -20,6 +20,10 @@
             <label>Jabatan</label>
             <input type="text" class="form-control" wire:model.blur="role" disabled />
         </div>
+        <div class="col-md-6 mb-4">
+            <label>Warna</label>
+            <input type="color" class="form-control form-control-color" wire:model.blur="color" title="pilih Warna">
+        </div>
 
         <hr>
 
