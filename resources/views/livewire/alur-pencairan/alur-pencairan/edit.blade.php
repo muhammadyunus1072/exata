@@ -30,7 +30,7 @@
                                     <div class="col-auto">
                                         <label>Status</label><br>
                                         @if(Auth::user()->roles[0]->name == 
-                                            App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                            App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                             [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC_EXATA])
                                             <button type="button" class="btn {{$alur_pencairan['status']== \App\Models\AlurPencairan\AlurPencairan::STATUS_DONE ? 'btn-success' : 'btn-warning'}}" wire:click="updateStatus('{{$alur_pencairan['alur_pencairan_id']}}')">{{$alur_pencairan['status']}}</button>
                                         @else
@@ -78,7 +78,7 @@
                                                             </td>
                                                             <td>
                                                                 @if(Auth::user()->roles[0]->name == 
-                                                                App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                 [$alur['role_name']])
                                                                     <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$index_alur}}.keterangan" placeholder="-- ISI --">
                                                                 @else
@@ -99,7 +99,7 @@
                                                                         <div class="row">
                                                                             <div class="col-auto mb-3">
                                                                                 @if(Auth::user()->roles[0]->name == 
-                                                                                App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                                App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                 [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                                                     <button type="button" wire:loading.attr="disabled" class="btn btn-info mt-3" wire:click="addDataSalahTransfer">
                                                                                         Tambah Data Salah Transfer
@@ -124,7 +124,7 @@
                                                                                 <tbody>
                                                                                     @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
                                                                                     @if(Auth::user()->roles[0]->name == 
-                                                                                    App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                                    App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                                                         <tr wire:key="data-salah-transfer-{{$index_data_salah_transfer}}">
                                                                                             <td>
@@ -265,7 +265,7 @@
                                                             </td>
                                                             <td>
                                                                 @if(Auth::user()->roles[0]->name == 
-                                                                App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                 [$alur['role_name']])
                                                                     <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$index_alur}}.keterangan" placeholder="-- ISI --">
                                                                 @else
@@ -285,7 +285,7 @@
                                                                     <div class="p-3 bg-light">
                                                                         <div class="row">
                                                                             @if(Auth::user()->roles[0]->name == 
-                                                                            App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                            App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                             [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                                                 <div class="col-auto mb-3">
                                                                                     <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveMelengkapiRekeningSalah">
@@ -310,7 +310,7 @@
                                                                                     @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
                                                                                     
                                                                                     @if(Auth::user()->roles[0]->name == 
-                                                                                    App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                                    App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                                                         <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
                                                                                             <td>
@@ -466,7 +466,7 @@
                                                             </td>
                                                             <td>
                                                                 @if(Auth::user()->roles[0]->name == 
-                                                                App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                 [$alur['role_name']])
                                                                     <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$index_alur}}.keterangan" placeholder="-- ISI --">
                                                                 @else
@@ -486,7 +486,7 @@
                                                                     <div class="p-3 bg-light">
                                                                         <div class="row">
                                                                             @if(Auth::user()->roles[0]->name == 
-                                                                            App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                            App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                             [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                                                 <div class="col-auto mb-3">
                                                                                     <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveTransferSusulan">
@@ -510,7 +510,7 @@
                                                                                 <tbody>
                                                                                     @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
                                                                                     @if(Auth::user()->roles[0]->name == 
-                                                                                    App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                                                    App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                                                         <tr wire:key="transfer-susulan-{{$index_data_salah_transfer}}">
                                                                                             <td>
@@ -666,7 +666,7 @@
                                                         </td>
                                                         <td>
                                                             @if(Auth::user()->roles[0]->name == 
-                                                            App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+                                                            App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                             [$alur['role_name']]
                                                             &&  (($alur['is_multi'] && $alur['user_id'] == Auth::user()->id) || !$alur['is_multi'])
                                                             )

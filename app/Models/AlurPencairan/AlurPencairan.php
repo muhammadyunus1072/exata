@@ -46,7 +46,7 @@ class AlurPencairan extends Model
     //             <div class="form-check">
     //                 <input 
     //                 {{ (Auth::user()->roles[0]->name == 
-    //                  App\Models\AlurPencairan\ALurPencairan::ROLE_ALIASE
+    //                  App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
     //                  [App\Models\AlurPencairan\AlurPencairan::ROLE_ACC] ? '' : 'disabled') }}
     //                 class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$no - 1}}.is_checked">
     //             </div>
@@ -57,7 +57,7 @@ class AlurPencairan extends Model
     //         <td class=" my-0 py-1">
     //             @if(Aut
     //             h::user()->roles[0]->name == App\Mod
-    //             els\AlurPencairan\ALurPencairan::ROLE_ALIASE[App
+    //             els\AlurPencairan\AlurPencairan::ROLE_ALIASE[App
     //             \Models\AlurPencairan\AlurPencairan::ROLE_ACC])
     //                 <input type="text" class="form
     //                     ontrol py-0" wire:model="alur_proseses.{{$index_proses}}.keterangan" placeholder="-- ISI --">
