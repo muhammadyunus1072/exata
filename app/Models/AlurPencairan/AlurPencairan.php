@@ -115,7 +115,7 @@ class AlurPencairan extends Model
     // </div>
     const ROLE_ALIASE = [
         self::ROLE_SUPER_ADMIN => 'ADMIN',
-        self::ROLE_SUPERVISOR => 'ADMIN',
+        self::ROLE_SUPERVISOR => 'SUPERVISOR',
         self::ROLE_PAK_NOVI => 'PAK NOVI',
         self::ROLE_ACC_EXATA => 'ACC EXATA',
         self::ROLE_HS => 'HS',
