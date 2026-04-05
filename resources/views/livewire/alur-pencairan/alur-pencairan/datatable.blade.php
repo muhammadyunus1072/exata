@@ -78,7 +78,7 @@
                                     break;
                                     
                                 default:
-                                // NOMRAL
+                                    // NOMRAL
                                     $bg_color = '#DDF4E7';
                                     break;
                             }
