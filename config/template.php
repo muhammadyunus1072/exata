@@ -2,7 +2,7 @@
 
 return [
     'title' => env('APP_NAME', 'Template Project'),
-    'subtitle' => 'Software House',
+    'subtitle' => 'Exata Indonesia',
 
     'logo_auth' => 'files/images/LOGO EXATA INDONESIA.svg',
     'logo_auth_background' => 'white',
