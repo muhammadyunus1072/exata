@@ -301,6 +301,13 @@ class Edit extends Component
                     ];
                     AlurPencairanRepository::update(Crypt::decrypt($this->alur_pencairan_id), $validateData);
                 }
+                if (Auth::user()->roles[0]->name == AlurPencairan::ROLE_ALIASE[AlurPencairan::ROLE_FINANCE]) {
+                    $validateData = [
+                        'judul' => $this->alur_pencairan['judul'],
+                        'qty_cair' => $this->alur_pencairan['qty_cair'],
+                    ];
+                    AlurPencairanRepository::update(Crypt::decrypt($this->alur_pencairan_id), $validateData);
+                }
 
                 foreach ($this->alur_proseses as $index => $alur_proses) {
                     if ($alur_proses['keterangan'] != $alur_proses['keterangan_old']) {

@@ -24,11 +24,23 @@
                                     <div class="row">
                                         <div class="col-auto mb-3">
                                             <label>Judul</label>
-                                            <p class="form-control">{{$alur_pencairan['judul']}}</p>
+                                            @if(Auth::user()->roles[0]->name == 
+                                                App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
+                                                <input type="text" class="form-control" wire:model="alur_pencairan.judul">
+                                            @else
+                                                <p class="form-control">{{$alur_pencairan['judul']}}</p>
+                                            @endif
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label>Qty cair</label>
-                                            <p class="form-control">{{$alur_pencairan['qty_cair']}}</p>
+                                            @if(Auth::user()->roles[0]->name == 
+                                                App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
+                                                <input type="text" class="form-control" wire:model="alur_pencairan.qty_cair">
+                                            @else
+                                                <p class="form-control">{{$alur_pencairan['qty_cair']}}</p>
+                                            @endif
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label>Jenis Pencairan</label>
