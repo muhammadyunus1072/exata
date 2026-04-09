@@ -274,6 +274,11 @@ class Edit extends Component
             'tanggal_transfer' => '',
             'updator_rekening_terbaru_name' => '',
             'updator_tanggal_transfer_name' => '',
+
+            'updator_rekening_terbaru_name' => '',
+            'updator_tanggal_transfer_name' => '',
+            'rekening_terbaru_updated_at' => '',
+            'tanggal_transfer_updated_at' => '',
         ];
     }
 
