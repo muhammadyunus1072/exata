@@ -186,7 +186,7 @@
                                                                                     </button>
                                                                                 @endif
                                                                             </div>
-                                                                            <table class="table table-sm">
+                                                                            <table class="table table-sm table-no-bg">
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>No</th>
@@ -204,7 +204,7 @@
                                                                                     App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
                                                                                         <tr wire:key="data-salah-transfer-{{$index_data_salah_transfer}}">
-                                                                                            <td>
+                                                                                            <td rowspan="2">
                                                                                                 <p class="form-control">
                                                                                                     {{ $loop->iteration }}
                                                                                                 </p>
@@ -234,9 +234,9 @@
                                                                                                 @enderror
                                                                                             </td>
                                                                                             <td>
-                                                                                                <input placeholder="Tanggal Lahir" type="date" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_lahir" class="form-control">
+                                                                                                <input placeholder="Tanggal Lahir" type="text" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_lahir_input" class="form-control">
                                                                                 
-                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_lahir')
+                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_lahir_input')
                                                                                                     <div class="text-danger">{{ $message }}</div>
                                                                                                 @enderror
                                                                                             </td>
@@ -270,14 +270,14 @@
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr wire:key="keterangan-data-salah-transfer-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="7">
+                                                                                            <td colspan="6">
                                                                                                 <input placeholder="Keterangan" type="text" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.keterangan" class="form-control">
                                                                                             </td>
                                                                                         </tr>
                                                                                     @else
                                                                                         <tr wire:key="data-salah-transfer-{{$index_data_salah_transfer}}">
-                                                                                            <td>
-                                                                                                <p class="form-control">
+                                                                                            <td rowspan="2">
+                                                                                                <p class="">
                                                                                                     {{ $loop->iteration }}
                                                                                                 </p>
                                                                                             </td>
@@ -314,6 +314,14 @@
                                                                                             </td>
                                                                                             <td>
                                                                                                 <p class="form-control">Dibuat oleh: {{ $data_salah_transfers[$index_data_salah_transfer]['creator_name'] }}</p>
+                                                                                            </td>
+                                                                                        </tr>
+
+                                                                                        <tr wire:key="keterangan-data-salah-transfer-{{$index_data_salah_transfer}}">
+                                                                                            <td colspan="6">
+                                                                                                <p class="form-control">
+                                                                                                    {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
+                                                                                                </p>
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endif
@@ -376,7 +384,7 @@
                                                                                 </div>
                                                                             @endif
     
-                                                                            <table class="table table-sm">
+                                                                            <table class="table table-sm table-no-bg">
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>No</th>
@@ -395,8 +403,8 @@
                                                                                     App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
                                                                                         <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td>
-                                                                                                <p class="form-control">
+                                                                                            <td rowspan="2">
+                                                                                                <p class="">
                                                                                                     {{ $loop->iteration }}
                                                                                                 </p>
                                                                                             </td>
@@ -464,7 +472,7 @@
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="7">
+                                                                                            <td colspan="6">
                                                                                                 <p class="form-control">
                                                                                                     {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
                                                                                                 </p>
@@ -472,8 +480,8 @@
                                                                                         </tr>
                                                                                     @else
                                                                                         <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td>
-                                                                                                <p class="form-control">
+                                                                                            <td rowspan="2">
+                                                                                                <p class="">
                                                                                                     {{ $loop->iteration }}
                                                                                                 </p>
                                                                                             </td>
@@ -526,7 +534,7 @@
                                                                                         </tr>
 
                                                                                         <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="7">
+                                                                                            <td colspan="6">
                                                                                                 <p class="form-control">
                                                                                                     {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
                                                                                                 </p>
@@ -591,7 +599,7 @@
                                                                                     </button>
                                                                                 </div>
                                                                             @endif
-                                                                            <table class="table table-sm">
+                                                                            <table class="table table-sm table-no-bg">
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>No</th>
@@ -610,8 +618,8 @@
                                                                                     App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
                                                                                         <tr wire:key="transfer-susulan-{{$index_data_salah_transfer}}">
-                                                                                            <td>
-                                                                                                <p class="form-control">
+                                                                                            <td rowspan="2">
+                                                                                                <p class="">
                                                                                                     {{ $loop->iteration }}
                                                                                                 </p>
                                                                                             </td>
@@ -671,7 +679,7 @@
                                                                                         </tr>
 
                                                                                         <tr wire:key="keterangan-transfer-susulan-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="8">
+                                                                                            <td colspan="7">
                                                                                                 <p class="form-control">
                                                                                                     {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
                                                                                                 </p>
@@ -679,8 +687,8 @@
                                                                                         </tr>
                                                                                     @else
                                                                                         <tr wire:key="transfer-susulan-{{$index_data_salah_transfer}}">
-                                                                                            <td>
-                                                                                                <p class="form-control">
+                                                                                            <td rowspan="2">
+                                                                                                <p class="">
                                                                                                     {{ $loop->iteration }}
                                                                                                 </p>
                                                                                             </td>
@@ -735,7 +743,7 @@
                                                                                         </tr>
 
                                                                                         <tr wire:key="keterangan-transfer-susulan-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="8">
+                                                                                            <td colspan="7">
                                                                                                 <p class="form-control">
                                                                                                     {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
                                                                                                 </p>
@@ -868,6 +876,15 @@
         }
         table tr:nth-child(2n+1) {
         background-color: #edf7f8;
+        }
+        table.table-no-bg tr:nth-child(4n-3),
+        table.table-no-bg tr:nth-child(4n-2) {
+            background-color: #edf7f8; /* group 1 */
+        }
+
+        table.table-no-bg tr:nth-child(4n-1),
+        table.table-no-bg tr:nth-child(4n) {
+            background-color: #ffffff; /* group 2 */
         }
 
         @media screen and (max-width: 700px) {

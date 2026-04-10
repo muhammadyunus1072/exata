@@ -11,6 +11,7 @@ use App\Models\AlurPencairan\AlurPencairanStatus;
 use App\Repositories\AlurPencairan\AlurPencairanDetailRepository;
 use App\Repositories\AlurPencairan\AlurPencairanHistoryRepository;
 use App\Repositories\AlurPencairan\AlurPencairanRepository;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -92,6 +93,7 @@ class Edit extends Component
                 'id' => $detail['id'],
                 'no_input_jepang' => $detail['no_input_jepang'],
                 'nama_lengkap' => $detail['nama_lengkap'],
+                'tanggal_lahir_input' => Carbon::parse($detail['tanggal_lahir'])->format('Ymd'),
                 'tanggal_lahir' => $detail['tanggal_lahir'],
                 'nominal_cair' => $detail['nominal_cair'],
                 'rekening_lama' => $detail['rekening_lama'],
@@ -137,6 +139,7 @@ class Edit extends Component
             DB::transaction(function () {
                 foreach ($this->data_salah_transfers as $data_tranfer) {
 
+                    $tgl_lahir = $data_tranfer['tanggal_lahir_input'] ? Carbon::createFromFormat('Ymd', $data_tranfer['tanggal_lahir_input'])->startOfDay()->format('Y-m-d H:i:s') : null;
                     $validateData = [
                         'alur_pencairan_id' => Crypt::decrypt($this->alur_pencairan_id),
                         'no_input_jepang' => $data_tranfer['no_input_jepang'],
@@ -145,7 +148,7 @@ class Edit extends Component
                         'jenis_rekening_lama' => $data_tranfer['jenis_rekening_lama'],
                         'jenis_rekening_terbaru' => $data_tranfer['jenis_rekening_terbaru'],
                         'keterangan' => $data_tranfer['keterangan'],
-                        'tanggal_lahir' => $data_tranfer['tanggal_lahir'],
+                        'tanggal_lahir' => $tgl_lahir,
                         'nominal_cair' => NumberFormatter::imaskToValue($data_tranfer['nominal_cair']),
                         'status' => AlurPencairanDetail::STATUS_PROSES,
                         'status_updated_at' => now(),
