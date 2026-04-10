@@ -4,13 +4,11 @@ namespace App\Models\AlurPencairan;
 
 use App\Models\User;
 use App\Repositories\AlurPencairan\AlurNotificationHistoryRepository;
-use App\Repositories\AlurPencairan\AlurPencairanAlurProsesRepository;
 use App\Repositories\AlurPencairan\AlurPencairanHistoryRepository;
 use App\Repositories\AlurPencairan\AlurProsesRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 use Muhammadyunus1072\TrackHistory\HasTrackHistory;
 
 class AlurPencairan extends Model

@@ -734,6 +734,7 @@
                                                                 App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                 [$alur['role_name']] 
                                                                 && (($alur['is_multi'] && $alur['user_id'] == Auth::user()->id) || !$alur['is_multi'])
+                                                                && ($alur['by_user'] && $alur['user_id'] == Auth::user()->id || !$alur['by_user'])
                                                                 ) 
                                                                     <input 
                                                                     class="form-check-input" type="checkbox" wire:model.live="alur_proseses.{{$index_alur}}.is_check">

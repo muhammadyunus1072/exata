@@ -78,16 +78,6 @@ class AlurProsesDetail extends Model
         'role_can_show' => [],
     ];
 
-    public const ALUR_SPEED_20_SHARE_LIST_CAIR_KE_CC = [
-        'name' => 'Share list cair ke CC',
-        'role_name' => AlurPencairan::ROLE_HS,
-        'is_multi' => false,
-        'by_user' => false,
-        'user_id' => null,
-        'alur_proses_key' => null,
-        'role_can_show' => [],
-    ];
-
     public const ALUR_SPEED_20_KIRIM_GAMBAR_LIST_CAIR_POSTING_SALES = [
         'name' => 'Kirim gambar list cair u di posting sales',
         'role_name' => AlurPencairan::ROLE_CC,
@@ -331,7 +321,6 @@ class AlurProsesDetail extends Model
     public const ALUR_SPEED_20_LIST = [
         self::ALUR_SPEED_20_TERIMA_EMAIL_DARI_PUSAT_DAN_SHARE_KE_ACCOUNTING_EXATA,
         self::ALUR_SPEED_20_TANDAI_NAMA_CAIR_DI_DATA_RE,
-        self::ALUR_SPEED_20_SHARE_LIST_CAIR_KE_CC,
         self::ALUR_SPEED_20_KIRIM_GAMBAR_LIST_CAIR_POSTING_SALES,
         self::ALUR_SPEED_20_KIRIM_KONTEN_N20_CAIR_POSTING_SALES,
         self::ALUR_SPEED_20_KIRIM_ICHIJIKIN_DAN_KWITANSI_KE_FINANCE,
@@ -412,6 +401,25 @@ class AlurProsesDetail extends Model
         'role_can_show' => [],
     ];
 
+    public const ALUR_NORMAL_MONITORING_LIST_PENCAIRAN = [
+        'name' => 'Monitoring List Pencairan',
+        'role_name' => AlurPencairan::ROLE_HS,
+        'is_multi' => false,
+        'by_user' => false,
+        'user_id' => null,
+        'alur_proses_key' => null,
+        'role_can_show' => [],
+    ];
+    public const ALUR_NORMAL_PRINT_BAGIKAN_KE_SALES = [
+        'name' => 'Print bagikan ke Sales',
+        'role_name' => AlurPencairan::ROLE_HS,
+        'is_multi' => false,
+        'by_user' => false,
+        'user_id' => null,
+        'alur_proses_key' => null,
+        'role_can_show' => [],
+    ];
+
     public const ALUR_NORMAL_MELENGKAPI_REKENING_KOSONG = [
         'name' => 'Melengkapi Rekening Kosong',
         'role_name' => AlurPencairan::ROLE_HS,
@@ -426,8 +434,8 @@ class AlurProsesDetail extends Model
         'name' => 'Share list cair ke CC',
         'role_name' => AlurPencairan::ROLE_HS,
         'is_multi' => false,
-        'by_user' => false,
-        'user_id' => null,
+        'by_user' => true,
+        'user_id' => 5,
         'alur_proses_key' => null,
         'role_can_show' => [],
     ];
@@ -436,8 +444,8 @@ class AlurProsesDetail extends Model
         'name' => 'Share Ichijikin non R/E 80% ke CC',
         'role_name' => AlurPencairan::ROLE_HS,
         'is_multi' => false,
-        'by_user' => false,
-        'user_id' => null,
+        'by_user' => true,
+        'user_id' => 5,
         'alur_proses_key' => null,
         'role_can_show' => [],
     ];
@@ -642,16 +650,6 @@ class AlurProsesDetail extends Model
         'role_can_show' => [],
     ];
 
-    public const ALUR_NORMAL_UPLOAD_TESTIMONI = [
-        'name' => 'Upod & Testimoni',
-        'role_name' => AlurPencairan::ROLE_HS,
-        'is_multi' => true,
-        'by_user' => false,
-        'user_id' => null,
-        'alur_proses_key' => null,
-        'role_can_show' => [],
-    ];
-
     public const ALUR_NORMAL_CEK_KWITANSI_SALES = [
         'name' => 'Cek Kwitansi yang di kirim sales',
         'role_name' => AlurPencairan::ROLE_FINANCE,
@@ -706,9 +704,11 @@ class AlurProsesDetail extends Model
         self::ALUR_NORMAL_SHARE_LIST_CAIR_KE_DRIVE,
         self::ALUR_NORMAL_SHARE_HAGAKI_KE_CC,
         self::ALUR_NORMAL_BLOCK01_TARIK_DATA,
-        self::ALUR_NORMAL_MELENGKAPI_REKENING_KOSONG,
+        self::ALUR_NORMAL_MONITORING_LIST_PENCAIRAN,
+        self::ALUR_NORMAL_PRINT_BAGIKAN_KE_SALES,
         self::ALUR_NORMAL_SHARE_LIST_CAIR_KE_CC,
         self::ALUR_NORMAL_SHARE_ICHIJIKIN_NON_RE_80,
+        self::ALUR_NORMAL_MELENGKAPI_REKENING_KOSONG,
         self::ALUR_NORMAL_CARI_ICHIJIKIN_RE_80,
         self::ALUR_NORMAL_KIRIM_ALL_ICHIJIKIN_KE_ACC,
         self::ALUR_NORMAL_KIRIM_DOKUMEN_KE_FINANCE,
@@ -729,7 +729,6 @@ class AlurProsesDetail extends Model
         self::ALUR_NORMAL_BUAT_LINK_DOKUMEN,
         self::ALUR_NORMAL_POSTING_KONTEN,
         self::ALUR_NORMAL_KIRIM_INFO_NENKIN,
-        self::ALUR_NORMAL_UPLOAD_TESTIMONI,
         self::ALUR_NORMAL_CEK_KWITANSI_SALES,
         self::ALUR_NORMAL_ARSIP_RESI_TRANSFER,
         self::ALUR_NORMAL_BLOK_ISI_NOMINAL_CAIR,
@@ -840,6 +839,25 @@ class AlurProsesDetail extends Model
         'role_can_show' => [],
     ];
 
+    public const ALUR_PROSES_80_MONITORING_LIST_PENCAIRAN = [
+        'name' => 'Monitoring List Pencairan',
+        'role_name' => AlurPencairan::ROLE_HS,
+        'is_multi' => false,
+        'by_user' => false,
+        'user_id' => null,
+        'alur_proses_key' => null,
+        'role_can_show' => [],
+    ];
+    public const ALUR_PROSES_80_PRINT_BAGIKAN_KE_SALES = [
+        'name' => 'Print bagikan ke Sales',
+        'role_name' => AlurPencairan::ROLE_HS,
+        'is_multi' => false,
+        'by_user' => false,
+        'user_id' => null,
+        'alur_proses_key' => null,
+        'role_can_show' => [],
+    ];
+
     public const ALUR_PROSES_80_MELENGKAPI_REKENING_KOSONG = [
         'name' => 'Melengkapi Rekening Kosong',
         'role_name' => AlurPencairan::ROLE_HS,
@@ -941,8 +959,10 @@ class AlurProsesDetail extends Model
         self::ALUR_PROSES_80_KIRIM_HASIL_CONVERT_KE_BU_INDI,
         self::ALUR_PROSES_80_SHARE_LIST_NAMA_KE_DRIVE,
         self::ALUR_PROSES_80_BLOCK01_TARIK_DATA,
-        self::ALUR_PROSES_80_MELENGKAPI_REKENING_KOSONG,
+        self::ALUR_PROSES_80_MONITORING_LIST_PENCAIRAN,
+        self::ALUR_PROSES_80_PRINT_BAGIKAN_KE_SALES,
         self::ALUR_PROSES_80_SHARE_LIST_CAIR_KE_CC,
+        self::ALUR_PROSES_80_MELENGKAPI_REKENING_KOSONG,
         self::ALUR_PROSES_80_KIRIM_GAMBAR_LIST_POSTING_SALES,
         self::ALUR_PROSES_80_KIRIM_KONTEN_N80_CAIR,
         self::ALUR_PROSES_80_BUAT_KWITANSI_KOKUMIN,
@@ -951,6 +971,7 @@ class AlurProsesDetail extends Model
         self::ALUR_PROSES_80_UPDATE_NAMA_KLIEN_RE_ENTRY,
         self::ALUR_PROSES_80_ISI_KETERANGAN_RE_ENTRY,
     ];
+
     protected $guarded = ['id'];
 
     public function isDeletable()
