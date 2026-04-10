@@ -107,6 +107,7 @@ class Edit extends Component
                 'updator_tanggal_transfer_name' => $detail->updatorTanggalTransfer ? $detail->updatorTanggalTransfer->name : '',
                 'rekening_terbaru_updated_at' => $detail->updatorRekeningTerbaru ? $detail->rekening_terbaru_updated_at : '',
                 'tanggal_transfer_updated_at' => $detail->updatorTanggalTransfer ? $detail->tanggal_transfer_updated_at : '',
+                'keterangan' => $detail['keterangan'],
             ];
         }
     }
@@ -143,6 +144,7 @@ class Edit extends Component
                         'rekening_lama' => $data_tranfer['rekening_lama'],
                         'jenis_rekening_lama' => $data_tranfer['jenis_rekening_lama'],
                         'jenis_rekening_terbaru' => $data_tranfer['jenis_rekening_terbaru'],
+                        'keterangan' => $data_tranfer['keterangan'],
                         'tanggal_lahir' => $data_tranfer['tanggal_lahir'],
                         'nominal_cair' => NumberFormatter::imaskToValue($data_tranfer['nominal_cair']),
                         'status' => AlurPencairanDetail::STATUS_PROSES,
@@ -283,6 +285,8 @@ class Edit extends Component
             'updator_tanggal_transfer_name' => '',
             'rekening_terbaru_updated_at' => '',
             'tanggal_transfer_updated_at' => '',
+
+            'keterangan' => '',
         ];
     }
 

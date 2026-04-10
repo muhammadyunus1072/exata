@@ -269,6 +269,11 @@
                                                                                                 @endif
                                                                                             </td>
                                                                                         </tr>
+                                                                                        <tr wire:key="keterangan-data-salah-transfer-{{$index_data_salah_transfer}}">
+                                                                                            <td colspan="7">
+                                                                                                <input placeholder="Keterangan" type="text" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.keterangan" class="form-control">
+                                                                                            </td>
+                                                                                        </tr>
                                                                                     @else
                                                                                         <tr wire:key="data-salah-transfer-{{$index_data_salah_transfer}}">
                                                                                             <td>
@@ -458,6 +463,13 @@
                                                                                                 @enderror
                                                                                             </td>
                                                                                         </tr>
+                                                                                        <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
+                                                                                            <td colspan="7">
+                                                                                                <p class="form-control">
+                                                                                                    {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
+                                                                                                </p>
+                                                                                            </td>
+                                                                                        </tr>
                                                                                     @else
                                                                                         <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
                                                                                             <td>
@@ -509,6 +521,14 @@
                                                                                             <td>
                                                                                                 <p class="form-control">
                                                                                                     @currency($data_salah_transfers[$index_data_salah_transfer]['nominal_cair'])
+                                                                                                </p>
+                                                                                            </td>
+                                                                                        </tr>
+
+                                                                                        <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
+                                                                                            <td colspan="7">
+                                                                                                <p class="form-control">
+                                                                                                    {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
                                                                                                 </p>
                                                                                             </td>
                                                                                         </tr>
@@ -649,6 +669,14 @@
                                                                                                 </div>
                                                                                             </td>
                                                                                         </tr>
+
+                                                                                        <tr wire:key="keterangan-transfer-susulan-{{$index_data_salah_transfer}}">
+                                                                                            <td colspan="8">
+                                                                                                <p class="form-control">
+                                                                                                    {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
+                                                                                                </p>
+                                                                                            </td>
+                                                                                        </tr>
                                                                                     @else
                                                                                         <tr wire:key="transfer-susulan-{{$index_data_salah_transfer}}">
                                                                                             <td>
@@ -702,6 +730,14 @@
                                                                                             <td>
                                                                                                 <p class="form-control">
                                                                                                     @currency($data_salah_transfers[$index_data_salah_transfer]['nominal_cair'])
+                                                                                                </p>
+                                                                                            </td>
+                                                                                        </tr>
+
+                                                                                        <tr wire:key="keterangan-transfer-susulan-{{$index_data_salah_transfer}}">
+                                                                                            <td colspan="8">
+                                                                                                <p class="form-control">
+                                                                                                    {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}
                                                                                                 </p>
                                                                                             </td>
                                                                                         </tr>

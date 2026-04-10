@@ -34,6 +34,8 @@ class AlurPencairanDetail extends Model
         'tanggal_transfer',
         "tanggal_transfer_updated_by",
         "tanggal_transfer_updated_at",
+
+        "keterangan",
     ];
 
 

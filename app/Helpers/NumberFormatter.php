@@ -14,7 +14,23 @@ class NumberFormatter
 
     public static function imaskToValue($data)
     {
-        return str($data)->replace('.', '')->replace(',', '.')->toFloat();
+
+        if (blank($data)) {
+            return null;
+        }
+
+        $value = trim($data);
+
+        // Indonesian format: 90.000,99
+        if (str_contains($value, ',')) {
+            $value = str_replace('.', '', $value); // remove thousand
+            $value = str_replace(',', '.', $value); // decimal -> dot
+        } else {
+            // Only thousand separator
+            $value = str_replace('.', '', $value);
+        }
+
+        return $value;
     }
 
     public static function valueToImask($data)
