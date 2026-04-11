@@ -607,7 +607,7 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th style="width: 2%;">No</th>
-                                                                                        <th style="width: 5%;">Tgl transfer</th>
+                                                                                        <th style="width: 8%;">Tgl transfer</th>
                                                                                         <th style="width: 23%;">Rekening Terbaru</th>
                                                                                         <th style="width: 23%;">Rekening Lama</th>
                                                                                         <th style="width: 7%;">No Input Japan</th>
