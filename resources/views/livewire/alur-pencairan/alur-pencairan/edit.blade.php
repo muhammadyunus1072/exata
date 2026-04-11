@@ -194,10 +194,10 @@
                                                                                                 <tr>
                                                                                                     <th>No</th>
                                                                                                     <th>Rekening Lama</th>
-                                                                                                    <th>No Input Japan</th>
+                                                                                                    <th style="width: 10%;">No Input Japan</th>
                                                                                                     <th>Nama Lengkap</th>
-                                                                                                    <th>Tgl Lahir</th>
-                                                                                                    <th>Nominal Cair</th>
+                                                                                                    <th style="width: 7%;">Tgl Lahir</th>
+                                                                                                    <th style="width: 15%;">Nominal Cair</th>
                                                                                                     <th>Aksi</th>
                                                                                                 </tr>
                                                                                             </thead>
@@ -250,7 +250,7 @@
                                                                                                                 <div class="col mx-0 px-0">
                                                                                                                     <input placeholder="Nominal Cair" type="text" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.nominal_cair" class="form-control currency" max="999999999999999">
                                                                                                                 </div>
-                                                                                                                <div class="col-md-4 mx-0 px-0">
+                                                                                                                <div class="col-md-6 mx-0 px-0">
                                                                                                                     <select wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.mata_uang" class="form-select">
                                                                                                                         @foreach (App\Models\AlurPencairan\AlurPencairanDetail::MATA_UANG_CHOICE as $key => $name)    
                                                                                                                             <option value="{{$name}}">{{$name}}</option>
@@ -394,151 +394,160 @@
                                                                                     </button>
                                                                                 </div>
                                                                             @endif
-    
-                                                                            <table class="table table-sm table-no-bg">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Rekening Terbaru</th>
-                                                                                        <th>Rekening Lama</th>
-                                                                                        <th>No Input Japan</th>
-                                                                                        <th>Nama Lengkap</th>
-                                                                                        <th>Tgl Lahir</th>
-                                                                                        <th>Nominal Cair</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
+                                                                            <div class="col-md-12">
+                                                                                <table class="table table-sm table-no-bg w-full">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th style="width: 3%;">No</th>
+                                                                                            <th style="width: 27%;">Rekening Terbaru</th>
+                                                                                            <th style="width: 23%;">Rekening Lama</th>
+                                                                                            <th style="width: 8%;">No Input Japan</th>
+                                                                                            <th>Nama Lengkap</th>
+                                                                                            <th style="width: 8%;">Tgl Lahir</th>
+                                                                                            <th style="width: 12%;">Nominal Cair</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
+                                                                                        
+                                                                                        @if(Auth::user()->roles[0]->name == 
+                                                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                                                        [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
+                                                                                            <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
+                                                                                                <td rowspan="2">
+                                                                                                    <p class="">
+                                                                                                        {{ $loop->iteration }}
+                                                                                                    </p>
+                                                                                                </td>
+        
+                                                                                                <td>
+                                                                                                    <div class="row d-flex justify-content-between gap-0">
+                                                                                                        <div class="mx-0 px-0 col">
+                                                                                                            <input placeholder="Rekening Terbaru" type="text" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.rekening_terbaru" class="form-control px-0 ps-1 {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ? '' : 'is-invalid' }}">
+                                                                                                        </div>
+                                                                                                        <div class="mx-0 px-0" style="width: 38%;">
+                                                                                                            
+                                                                                                            <select wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.jenis_rekening_terbaru" class="form-select {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ? '' : 'is-invalid' }}">
+                                                                                                                @foreach (App\Models\AlurPencairan\AlurPencairanDetail::JENIS_REKENING_CHOICE as $key => $name)    
+                                                                                                                    <option value="{{$name}}">{{$name}}</option>
+                                                                                                                @endforeach
+                                                                                                            </select>
+                                                                                                        </div>
+                                                                                                    </div>
+        
+                                                                                                    @error('data_salah_transfers.{{$index_data_salah_transfer}}.rekening_terbaru')
+                                                                                                        <div class="text-danger">{{ $message }}</div>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <div class="row d-flex justify-content-between gap-0 mx-2">
+                                                                                                        <div class="mx-0 px-0 col">
+                                                                                                            <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['rekening_lama'] }}">
+                                                                                                        </div>
+                                                                                                        <div class="mx-0 px-0 col-md-4">
+                                                                                                            <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_lama'] }}">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control" value="{{$data_salah_transfers[$index_data_salah_transfer]['no_input_jepang']}}" readonly>
                                                                                     
-                                                                                    @if(Auth::user()->roles[0]->name == 
-                                                                                    App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
-                                                                                        <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td rowspan="2">
-                                                                                                <p class="">
-                                                                                                    {{ $loop->iteration }}
-                                                                                                </p>
-                                                                                            </td>
+                                                                                                    @error('data_salah_transfers.{{$index_data_salah_transfer}}.no_input_jepang')
+                                                                                                        <div class="text-danger">{{ $message }}</div>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control" value="{{$data_salah_transfers[$index_data_salah_transfer]['nama_lengkap']}}" readonly>
+                                                                                    
+                                                                                                    @error('data_salah_transfers.{{$index_data_salah_transfer}}.nama_lengkap')
+                                                                                                        <div class="text-danger">{{ $message }}</div>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control" value="{{$data_salah_transfers[$index_data_salah_transfer]['tanggal_lahir']}}" readonly>
+                                                                                    
+                                                                                                    @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_lahir')
+                                                                                                        <div class="text-danger">{{ $message }}</div>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <div class="row d-flex justify-content-between gap-0">
+                                                                                                        <div class="col mx-0 px-0">
+                                                                                                            <input type="text" class="form-control ps-1 currency" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['nominal_cair'] }}" max="999999999999999">
+                                                                                                        </div>
+                                                                                                        <div class="col-md-5 mx-0 px-0">
+                                                                                                            <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['mata_uang'] }}">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
+                                                                                                <td colspan="6">
+                                                                                                    <input type="text" class="form-control" value=" {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}" readonly>
+                                                                                                    {!! $data_salah_transfers[$index_data_salah_transfer]['id'] ?  '<div class="form-text text-info">Diupdate oleh: ' . $data_salah_transfers[$index_data_salah_transfer]['updator_rekening_terbaru_name'] . ', pada: '. $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru_updated_at'].'</div>' : ''!!}
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @else
+                                                                                            <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
+                                                                                                <td rowspan="2">
+                                                                                                    <p class="">
+                                                                                                        {{ $loop->iteration }}
+                                                                                                    </p>
+                                                                                                </td>
+        
+                                                                                                <td>
+                                                                                                    <div class="row d-flex justify-content-between gap-0">
+                                                                                                        <div class="col mx-0 px-0">
+                                                                                                            <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] }}" readonly>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-4 mx-0 px-0">
+                                                                                                            <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_terbaru'] }}" readonly>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+        
+                                                                                                <td>
+                                                                                                    <div class="row d-flex justify-content-between gap-0 mx-2">
+                                                                                                        <div class="col mx-0 px-0">
+                                                                                                            <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['rekening_lama'] }}">
+                                                                                                        </div>
+                                                                                                        <div class="col-md-4 mx-0 px-0">
+                                                                                                            <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_lama'] }}">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['no_input_jepang'] }}" readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['nama_lengkap'] }}" readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_lahir'] }}" readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <div class="row d-flex justify-content-between gap-0">
+                                                                                                        <div class="col mx-0 px-0">
+                                                                                                            <input type="text" class="form-control ps-1 currency" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['nominal_cair'] }}" max="999999999999999">
+                                                                                                        </div>
+                                                                                                        <div class="col-md-5 mx-0 px-0">
+                                                                                                            <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['mata_uang'] }}">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
     
-                                                                                            <td>
-                                                                                                <div class="input-group">
-                                                                                                    <input placeholder="Rekening Terbaru" type="text" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.rekening_terbaru" class="form-control {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ? '' : 'is-invalid' }}">
-                                                                                                    <select wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.jenis_rekening_terbaru" class="form-select {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ? '' : 'is-invalid' }}">
-                                                                                                        @foreach (App\Models\AlurPencairan\AlurPencairanDetail::JENIS_REKENING_CHOICE as $key => $name)    
-                                                                                                            <option value="{{$name}}">{{$name}}</option>
-                                                                                                        @endforeach
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                                
-                                                                                                {!! $data_salah_transfers[$index_data_salah_transfer]['id'] ?  '<div class="form-text text-info">Diupdate oleh: ' . $data_salah_transfers[$index_data_salah_transfer]['updator_rekening_terbaru_name'] . ', pada: '. $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru_updated_at'].'</div>' : ''!!}
-    
-                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.rekening_terbaru')
-                                                                                                    <div class="text-danger">{{ $message }}</div>
-                                                                                                @enderror
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div class="row d-flex justify-content-between gap-0">
-                                                                                                    <div class="col mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['rekening_lama'] }}">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4 mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_lama'] }}">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control" value="{{$data_salah_transfers[$index_data_salah_transfer]['no_input_jepang']}}" readonly>
-                                                                                
-                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.no_input_jepang')
-                                                                                                    <div class="text-danger">{{ $message }}</div>
-                                                                                                @enderror
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control" value="{{$data_salah_transfers[$index_data_salah_transfer]['nama_lengkap']}}" readonly>
-                                                                                
-                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.nama_lengkap')
-                                                                                                    <div class="text-danger">{{ $message }}</div>
-                                                                                                @enderror
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control" value="{{$data_salah_transfers[$index_data_salah_transfer]['tanggal_lahir']}}" readonly>
-                                                                                
-                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_lahir')
-                                                                                                    <div class="text-danger">{{ $message }}</div>
-                                                                                                @enderror
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div class="row d-flex justify-content-between gap-0">
-                                                                                                    <div class="col mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1 currency" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['nominal_cair'] }}" max="999999999999999">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4 mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['mata_uang'] }}">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="6">
-                                                                                                <input type="text" class="form-control" value=" {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}" readonly>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    @else
-                                                                                        <tr wire:key="melengkapi-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td rowspan="2">
-                                                                                                <p class="">
-                                                                                                    {{ $loop->iteration }}
-                                                                                                </p>
-                                                                                            </td>
-    
-                                                                                            <td>
-                                                                                                <div class="input-group">
-                                                                                                    <input type="text" class="form-control" readonly value="{{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ?? '-'}}">
-                                                                                                    <input type="text" class="form-control" readonly value="{{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_terbaru'] }}">
-                                                                                                </div>
-                                                                                                <div class="form-text text-info">Diupdate oleh: {{ $data_salah_transfers[$index_data_salah_transfer]['updator_rekening_terbaru_name'] }}, pada: {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru_updated_at'] }}</div>
-                                                                                            </td>
-    
-                                                                                            <td>
-                                                                                                <div class="row d-flex justify-content-between gap-0">
-                                                                                                    <div class="col mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['rekening_lama'] }}">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4 mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_lama'] }}">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['no_input_jepang'] }}" readonly>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['nama_lengkap'] }}" readonly>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_lahir'] }}" readonly>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <div class="row d-flex justify-content-between gap-0">
-                                                                                                    <div class="col mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1 currency" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['nominal_cair'] }}" max="999999999999999">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4 mx-0 px-0">
-                                                                                                        <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['mata_uang'] }}">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
-
-                                                                                        <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
-                                                                                            <td colspan="6">
-                                                                                                <input type="text" class="form-control" value=" {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}" readonly>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    @endif
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
+                                                                                            <tr wire:key="keterangan-rekening-salah-{{$index_data_salah_transfer}}">
+                                                                                                <td colspan="6">
+                                                                                                    <input type="text" class="form-control" value=" {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}" readonly>
+                                                                                                    <div class="form-text text-info">Diupdate oleh: {{ $data_salah_transfers[$index_data_salah_transfer]['updator_rekening_terbaru_name'] }}, pada: {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru_updated_at'] }}</div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @endif
+                                                                                        @endforeach
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     
@@ -597,14 +606,14 @@
                                                                             <table class="table table-sm table-no-bg">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Tgl transfer</th>
-                                                                                        <th>Rekening Terbaru</th>
-                                                                                        <th>Rekening Lama</th>
-                                                                                        <th>No Input Japan</th>
+                                                                                        <th style="width: 2%;">No</th>
+                                                                                        <th style="width: 5%;">Tgl transfer</th>
+                                                                                        <th style="width: 23%;">Rekening Terbaru</th>
+                                                                                        <th style="width: 23%;">Rekening Lama</th>
+                                                                                        <th style="width: 7%;">No Input Japan</th>
                                                                                         <th>Nama Lengkap</th>
-                                                                                        <th>Tgl Lahir</th>
-                                                                                        <th>Nominal Cair</th>
+                                                                                        <th style="width: 8%;">Tgl Lahir</th>
+                                                                                        <th style="width: 12%;">Nominal Cair</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
@@ -621,21 +630,23 @@
     
                                                                                             <td>
                                                                                                 <input placeholder="Tgl Transfer" type="date" wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_transfer" class="form-control mb-0 {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer'] ? '' : 'is-invalid' }}">
-                                                                                                {!! $data_salah_transfers[$index_data_salah_transfer]['id'] ?  '<div class="form-text text-info">Diupdate oleh: ' . $data_salah_transfers[$index_data_salah_transfer]['updator_tanggal_transfer_name'] . ', pada: '. $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer_updated_at'] .'</div>' : ''!!}
+                                                                                               
                                                                                                 @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_transfer')
                                                                                                     <div class="text-danger">{{ $message }}</div>
                                                                                                 @enderror
                                                                                             </td>
                                                                                             <td>
-                                                                                                
-                                                                                                <div class="input-group">
-                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] }}" readonly>
-                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_terbaru'] }}" readonly>
+                                                                                                <div class="row d-flex justify-content-between gap-0">
+                                                                                                    <div class="col mx-0 px-0">
+                                                                                                        <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] }}" readonly>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4 mx-0 px-0">
+                                                                                                        <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_terbaru'] }}" readonly>
+                                                                                                    </div>
                                                                                                 </div>
-                                                                                            
                                                                                             </td>
                                                                                             <td>
-                                                                                                <div class="row d-flex justify-content-between gap-0">
+                                                                                                <div class="row d-flex justify-content-between gap-0 mx-2">
                                                                                                     <div class="col mx-0 px-0">
                                                                                                         <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['rekening_lama'] }}">
                                                                                                     </div>
@@ -658,7 +669,7 @@
                                                                                                     <div class="col mx-0 px-0">
                                                                                                         <input type="text" class="form-control ps-1 currency" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['nominal_cair'] }}" max="999999999999999">
                                                                                                     </div>
-                                                                                                    <div class="col-md-4 mx-0 px-0">
+                                                                                                    <div class="col-md-5 mx-0 px-0">
                                                                                                         <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['mata_uang'] }}">
                                                                                                     </div>
                                                                                                 </div>
@@ -668,6 +679,7 @@
                                                                                         <tr wire:key="keterangan-transfer-susulan-{{$index_data_salah_transfer}}">
                                                                                             <td colspan="7">
                                                                                                 <input type="text" class="form-control" value=" {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}" readonly>
+                                                                                                 {!! $data_salah_transfers[$index_data_salah_transfer]['id'] ?  '<div class="form-text text-info">Diupdate oleh: ' . $data_salah_transfers[$index_data_salah_transfer]['updator_tanggal_transfer_name'] . ', pada: '. $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer_updated_at'] .'</div>' : ''!!}
                                                                                             </td>
                                                                                         </tr>
                                                                                     @else
@@ -680,13 +692,15 @@
     
                                                                                             <td>
                                                                                                 <input type="text" class="form-control" readonly value="{{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer'] ?? '-'}}">
-                                                                                                    
-                                                                                                <div class="form-text text-info">Diupdate oleh: {{ $data_salah_transfers[$index_data_salah_transfer]['updator_tanggal_transfer_name'] }}, pada: {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer_updated_at'] }}</div>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <div class="input-group">
-                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ?? '-'}}" readonly>
-                                                                                                    <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_terbaru'] }}" readonly>
+                                                                                                <div class="row d-flex justify-content-between gap-0">
+                                                                                                    <div class="col mx-0 px-0">
+                                                                                                        <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] }}" readonly>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4 mx-0 px-0">
+                                                                                                        <input type="text" class="form-control" value=" {{ $data_salah_transfers[$index_data_salah_transfer]['jenis_rekening_terbaru'] }}" readonly>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
@@ -713,7 +727,7 @@
                                                                                                     <div class="col mx-0 px-0">
                                                                                                         <input type="text" class="form-control ps-1 currency" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['nominal_cair'] }}" max="999999999999999">
                                                                                                     </div>
-                                                                                                    <div class="col-md-4 mx-0 px-0">
+                                                                                                    <div class="col-md-5 mx-0 px-0">
                                                                                                         <input type="text" class="form-control ps-1" readonly placeholder="-" value="{{ $data_salah_transfers[$index_data_salah_transfer]['mata_uang'] }}">
                                                                                                     </div>
                                                                                                 </div>
@@ -723,6 +737,7 @@
                                                                                         <tr wire:key="keterangan-transfer-susulan-{{$index_data_salah_transfer}}">
                                                                                             <td colspan="7">
                                                                                                 <input type="text" class="form-control" value=" {{$data_salah_transfers[$index_data_salah_transfer]['keterangan']}}" readonly>
+                                                                                                <div class="form-text text-info">Diupdate oleh: {{ $data_salah_transfers[$index_data_salah_transfer]['updator_tanggal_transfer_name'] }}, pada: {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer_updated_at'] }}</div>
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endif
