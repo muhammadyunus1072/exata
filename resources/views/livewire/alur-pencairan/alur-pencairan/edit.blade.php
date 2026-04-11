@@ -764,7 +764,7 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                                <p class="{{$alur_proseses[$index_alur]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-success'}}">{{$alur_proseses[$index_alur]['status_updated_at']}} {{$alur_proseses[$index_alur]['creator_name']}}</p>
+                                                                <p class="{{$alur_proseses[$index_alur]['status'] != App\Models\AlurPencairan\AlurPencairanStatus::STATUS_DONE ? 'text-danger' : 'text-status-done'}}">{{$alur_proseses[$index_alur]['status_updated_at']}} {{$alur_proseses[$index_alur]['creator_name']}}</p>
                                                             </td>
                                                             <td>
                                                                 @if(Auth::user()->roles[0]->name == 
@@ -815,6 +815,10 @@
         padding: 1rem;
         text-align: center;
         text-transform: uppercase;
+        }
+
+        .text-status-done{
+            color: #2b686e;
         }
 
         .table-users {
