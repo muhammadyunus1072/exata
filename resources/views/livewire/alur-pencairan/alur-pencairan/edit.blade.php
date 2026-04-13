@@ -301,7 +301,7 @@
                                                                                                 {{ $loop->iteration }}
                                                                                             </p>
                                                                                         </td>
-                                                                                            <td class="text-start">{{$tranfer['rekening_lama']}} ({{$tranfer['jenis_rekening_lama']}})</td>
+                                                                                            <td class="text-center">{{$tranfer['rekening_lama']}} ({{$tranfer['jenis_rekening_lama']}})</td>
 
                                                                                             <td>{{$tranfer['no_input_jepang']}}</td>
 
@@ -432,16 +432,16 @@
                                                                                     <td rowspan="2">{{$loop->iteration}}</td>
 
                                                                                     <td>
-                                                                                        <div class="d-flex gap-0 p-0 m-0">
-                                                                                            @if(Auth::user()->roles[0]->name == 
-                                                                                            App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                                                            [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
+                                                                                        @if(Auth::user()->roles[0]->name == 
+                                                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                                                        [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
 
+                                                                                            <div class="d-flex gap-0 p-0 m-0">
                                                                                                 <input
                                                                                                     type="text"
                                                                                                     class="px-0 py-1 m-0 form-control
                                                                                                     {{ $data_salah_transfers[$index_data_salah_transfer]['rekening_terbaru'] ? '' : 'is-invalid' }}"
-                                                                                                      style="width: 300px;"
+                                                                                                    style="width: 300px;"
                                                                                                     wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.rekening_terbaru"
                                                                                                     
                                                                                                 >
@@ -454,12 +454,11 @@
                                                                                                         <option value="{{$name}}">{{$name}}</option>
                                                                                                     @endforeach
                                                                                                 </select>
-                                                                                            @else
-                                                                                                {{$tranfer['rekening_terbaru'] ? $tranfer['rekening_terbaru'] ." ( ".$tranfer['jenis_rekening_terbaru']." )" : "-"}}
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p class="text-center">{{$tranfer['rekening_terbaru'] ? $tranfer['rekening_terbaru'] ." ( ".$tranfer['jenis_rekening_terbaru']." )" : "-"}}</p>
 
-                                                                                            @endif
-
-                                                                                        </div>
+                                                                                        @endif
                                                                                     </td>
 
                                                                                     {{-- <td>{{$tranfer['rekening_lama']}} ({{$tranfer['jenis_rekening_lama']}})</td> --}}
@@ -591,7 +590,7 @@
                                                                                                     <div class="text-danger">{{ $message }}</div>
                                                                                                 @enderror
                                                                                             @else
-                                                                                                <p class="my-0 py-0 fs-5 fw-bold">
+                                                                                                <p class="my-0 py-0 fs-5 fw-bold text-center">
                                                                                                     {{$tranfer['tanggal_transfer'] ? $tranfer['tanggal_transfer'] : "-"}}
                                                                                                 </p>
 
