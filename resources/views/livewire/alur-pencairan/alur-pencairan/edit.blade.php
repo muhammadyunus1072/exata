@@ -317,7 +317,12 @@
                                                                                             <tr wire:key="keterangan-data-salah-transfer-{{$index_data_salah_transfer}}">
                                                                                                 <td colspan="6">
                                                                                                     <p class="text-dark my-0 py-0">Keterangan: <span class="text-danger">{{$tranfer['keterangan']}}</span></p>
-                                                                                                    <p class="form-text mb-0 pb-0 text-info">Dibuat oleh: {{ $data_salah_transfers[$index_data_salah_transfer]['creator_name'] }}</p>
+                                                                                                    @if($tranfer['id'])
+                                                                                                        <div class="form-text text-info my-0 py-0">
+                                                                                                            Dibuat oleh:
+                                                                                                            {{ $data_salah_transfers[$index_data_salah_transfer]['creator_name'] }}
+                                                                                                        </div>
+                                                                                                    @endif
                                                                                                 </td>
                                                                                             </tr>
                                                                                         @endif
