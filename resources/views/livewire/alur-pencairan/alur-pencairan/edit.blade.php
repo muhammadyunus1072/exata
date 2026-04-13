@@ -352,7 +352,7 @@
                                                         <tr wire:key="alur-proses-{{$index_alur}}"  data-bs-toggle="collapse"
                                                             data-bs-target="#melengkapi-rekening-salah" wire:click="getDataSalahTransfer">
                                                             <td>{{$alur['nomor_urut']}}</td>
-                                                            <td>{{$alur['user_name'] ? $alur['user_name']." -" : ""}} {{$alur['role_name']}}</td> 
+                                                            <td>{{$alur['role_name']}}</td> 
                                                             <td>{{$alur['name']}}</td>
                                                             <td class="d-flex justify-content-center">
                                                                 @if ($jumlah_belum_melengkapi_rekening_salah)
