@@ -10,43 +10,47 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Repositories\Account\RoleRepository;
+use App\Repositories\Account\UserRepository;
 use App\Repositories\AlurPencairan\AlurProsesDetailRepository;
 use App\Repositories\AlurPencairan\AlurProsesRepository;
+use Illuminate\Support\Str;
 
 class Detail extends Component
 {
     public $alur_proseses = [];
     public $alur_proses_removes = [];
     public $roles = [];
-    public $default_role;
+    public $users = [];
+    public $alur_proses;
 
     public array $oldNomor = [];
 
     public function mount()
     {
-        $this->roles = RoleRepository::getIdAndNames()->pluck('name')->toArray();
-        $this->default_role = $this->roles[0];
+        $this->roles = RoleRepository::getIdAndNames()->pluck('name', 'id')->toArray();
+        $this->users = UserRepository::all()->pluck('name', 'id')->toArray();
         $this->getAlurProseses();
     }
 
     private function getAlurProseses()
     {
-        $alur_proses = AlurProsesRepository::findBy([
+        $this->alur_proses = AlurProsesRepository::findBy([
             ['name', '=', AlurProses::TYPE_PROSES_80]
         ]);
-        $this->alur_proseses = collect($alur_proses->alurProsesDetails)
+        $this->alur_proseses = collect($this->alur_proses->alurProsesDetails)
             ->sortBy('nomor_urut')
             ->values()
             ->map(function ($detail) {
                 return [
                     'alur_proses_id' => $detail->alur_proses_id,
                     'alur_proses_detail_id' => $detail->id,
+                    'key' => Str::random(10),
                     'nomor_urut' => (int) $detail->nomor_urut,
                     'name' => $detail->name,
                     'role_id' => $detail->role_id,
                     'role_name' => $detail->role->name,
-                    'is_multi' => $detail->is_multi,
-                    'by_user' => $detail->by_user,
+                    'is_multi' => $detail->is_multi ? true : false,
+                    'by_user' => $detail->by_user ? true : false,
                     'user_id' => $detail->user_id,
                     'role_can_show' => $detail->role_can_show,
                 ];
@@ -109,18 +113,25 @@ class Detail extends Component
     public function addAlurProses()
     {
         $this->alur_proseses[] = [
-            'id' => '',
-            'role_id' => $this->default_role['id'],
-            'role_name' => $this->default_role['name'],
-            'name' => '',
+
+            'alur_proses_id' => $this->alur_proses->id,
+            'alur_proses_detail_id' => null,
+            'key' => Str::random(10),
             'nomor_urut' => count($this->alur_proseses) + 1,
+            'name' => '',
+            'role_id' => '',
+            'role_name' => '',
+            'is_multi' => false,
+            'by_user' => false,
+            'user_id' => false,
+            'role_can_show' => [],
         ];
     }
 
     public function removeAlurProses($index)
     {
-        if ($this->alur_proseses[$index]['id']) {
-            $this->alur_proses_removes[] = $this->alur_proseses[$index]['id'];
+        if ($this->alur_proseses[$index]['alur_proses_detail_id']) {
+            $this->alur_proses_removes[] = $this->alur_proseses[$index]['alur_proses_detail_id'];
         }
         unset($this->alur_proseses[$index]);
     }
@@ -128,13 +139,13 @@ class Detail extends Component
     #[On('on-dialog-confirm')]
     public function onDialogConfirm()
     {
-        $this->redirectRoute('alur_pencairan_alur_proses.index');
+        $this->redirectRoute('alur_proses_proses_80.index');
     }
 
     #[On('on-dialog-cancel')]
     public function onDialogCancel()
     {
-        $this->redirectRoute('alur_pencairan_alur_proses.index');
+        $this->redirectRoute('alur_proses_proses_80.index');
     }
 
     public function store()
@@ -144,15 +155,20 @@ class Detail extends Component
                 foreach ($this->alur_proseses as $alur) {
 
                     $validateData = [
-                        'role_id' => $alur['role_id'],
-                        'role_name' => RoleRepository::find($alur['role_id'])->name,
-                        'name' => $alur['name'],
+
+                        'alur_proses_id' => $this->alur_proses->id,
                         'nomor_urut' => $alur['nomor_urut'],
+                        'name' => $alur['name'],
+                        'role_id' => $alur['role_id'],
+                        'is_multi' => $alur['is_multi'],
+                        'by_user' => $alur['by_user'],
+                        'user_id' => $alur['user_id'],
+                        'role_can_show' => json_encode([]),
                     ];
-                    if ($alur['id']) {
-                        $vehicle = AlurProsesRepository::update($alur['id'], $validateData);
+                    if ($alur['alur_proses_detail_id']) {
+                        $vehicle = AlurProsesDetailRepository::update($alur['alur_proses_detail_id'], $validateData);
                     } else {
-                        $vehicle = AlurProsesRepository::create($validateData);
+                        $vehicle = AlurProsesDetailRepository::create($validateData);
                     }
                 }
             });
@@ -177,6 +193,6 @@ class Detail extends Component
 
     public function render()
     {
-        return view('livewire.alur-pencairan.alur-proses-proses-80.detail');
+        return view('livewire.alur-pencairan.alur-proses.detail');
     }
 }

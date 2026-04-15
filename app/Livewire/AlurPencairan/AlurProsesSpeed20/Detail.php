@@ -128,13 +128,13 @@ class Detail extends Component
     #[On('on-dialog-confirm')]
     public function onDialogConfirm()
     {
-        $this->redirectRoute('alur_pencairan_alur_proses.index');
+        $this->redirectRoute('alur_proses_speed_20.index');
     }
 
     #[On('on-dialog-cancel')]
     public function onDialogCancel()
     {
-        $this->redirectRoute('alur_pencairan_alur_proses.index');
+        $this->redirectRoute('alur_proses_speed_20.index');
     }
 
     public function store()
@@ -177,6 +177,6 @@ class Detail extends Component
 
     public function render()
     {
-        return view('livewire.alur-pencairan.alur-proses-speed-20.detail');
+        return view('livewire.alur-pencairan.alur-proses.detail');
     }
 }

@@ -75,7 +75,7 @@ class AlurPencairanStatus extends Model
         });
         self::updating(function ($model) {
             if ($model->alur_proses_detail_id) {
-                $model = $model->alurProsesDetail->saveInfo($model, false, '');
+                // $model = $model->alurProsesDetail->saveInfo($model, false, '');
             }
         });
         self::updated(function ($model) {

@@ -26,12 +26,12 @@ class AlurProsesDetail extends Model
         'role_can_show',
     ];
 
-    public function saveInfo($object, $data = null, $prefix = "alur_proses_detail_")
+    public function saveInfo($object, $data = false, $prefix = "alur_proses_detail_")
     {
         if ($data) {
-            foreach ($data as $item) {
-                $object[$prefix . "" . $item] = $this->$item;
-            }
+            // foreach ($data as $item) {
+            //     $object[$prefix . "" . $item] = $this->$item;
+            // }
         } else {
             $object[$prefix . 'alur_proses_id'] = $this->alur_proses_id;
             $object[$prefix . 'nomor_urut'] = $this->nomor_urut;
@@ -46,6 +46,20 @@ class AlurProsesDetail extends Model
         }
 
         return $object;
+    }
+
+    protected static function onBoot()
+    {
+        self::creating(function ($model) {
+            if ($model->isDirty('role_id')) {
+                $model->role_name = $model->role->name;
+            }
+        });
+        self::updating(function ($model) {
+            if ($model->isDirty('role_id')) {
+                $model->role_name = $model->role->name;
+            }
+        });
     }
     // ROLE ID
     // pak novi 2, acc exata 3, hs 4, cc 5, finance 6, sales 7, supervisor

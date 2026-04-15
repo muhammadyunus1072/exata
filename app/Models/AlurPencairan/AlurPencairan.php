@@ -226,7 +226,7 @@ class AlurPencairan extends Model
                         'role_name' => $detail->role_name,
                         'is_multi' => $detail->is_multi,
                         'by_user' => $detail->by_user,
-                        'user_id' => \Spatie\Permission\Models\Role::findById($detail->role_id)->users[0]->id,
+                        'user_id' => $detail->by_user ? $detail->user_id : \Spatie\Permission\Models\Role::findById($detail->role_id)->users[0]->id,
                         'alur_proses_key' => $detail->alur_proses_key,
                         'role_can_show' => $detail->role_can_show,
                     ]);
@@ -277,7 +277,7 @@ class AlurPencairan extends Model
 
     public function alurPencairanStatuses()
     {
-        return $this->hasMany(AlurPencairanStatus::class, 'alur_pencairan_id', 'id');
+        return $this->hasMany(AlurPencairanStatus::class, 'alur_pencairan_id', 'id')->orderBy('nomor_urut', 'ASC');
     }
 
     public function alurPencairanDetailOnProses()
