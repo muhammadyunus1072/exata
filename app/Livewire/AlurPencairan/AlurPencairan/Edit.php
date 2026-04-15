@@ -344,7 +344,6 @@ class Edit extends Component
                 $this->dispatch('notification-refresh');
             });
 
-
             DB::commit();
             Alert::confirmation(
                 $this,

@@ -708,8 +708,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="modal-footer d-flex justify-content-center" style="background-color: #327a81;"">
-                    <button type="submit" class="btn btn-primary"> Simpan  </button>
+                <div class="modal-footer d-flex justify-content-center" style="background-color: #327a81;">
+                    <button type="button" wire:click="saveChanges" class="btn btn-primary">Simpan</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
                 
