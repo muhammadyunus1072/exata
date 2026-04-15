@@ -5,13 +5,14 @@ namespace App\Livewire\AlurPencairan\AlurProsesSpeed20;
 use App\Helpers\Alert;
 use App\Models\AlurPencairan\AlurPencairan;
 use App\Models\AlurPencairan\AlurProses;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\On;
-use Livewire\Component;
 use App\Repositories\Account\RoleRepository;
 use App\Repositories\AlurPencairan\AlurProsesDetailRepository;
 use App\Repositories\AlurPencairan\AlurProsesRepository;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class Detail extends Component
 {
@@ -41,12 +42,13 @@ class Detail extends Component
                 return [
                     'alur_proses_id' => $detail->alur_proses_id,
                     'alur_proses_detail_id' => $detail->id,
+                    'key' => Str::random(10),
                     'nomor_urut' => (int) $detail->nomor_urut,
                     'name' => $detail->name,
                     'role_id' => $detail->role_id,
                     'role_name' => $detail->role->name,
-                    'is_multi' => $detail->is_multi,
-                    'by_user' => $detail->by_user,
+                    'is_multi' => $detail->is_multi ? true : false,
+                    'by_user' => $detail->by_user ? true : false,
                     'user_id' => $detail->user_id,
                     'role_can_show' => $detail->role_can_show,
                 ];
@@ -109,11 +111,18 @@ class Detail extends Component
     public function addAlurProses()
     {
         $this->alur_proseses[] = [
-            'id' => '',
-            'role_id' => $this->default_role['id'],
-            'role_name' => $this->default_role['name'],
-            'name' => '',
+
+            'alur_proses_id' => $this->alur_proses->id,
+            'alur_proses_detail_id' => null,
+            'key' => Str::random(10),
             'nomor_urut' => count($this->alur_proseses) + 1,
+            'name' => '',
+            'role_id' => '',
+            'role_name' => '',
+            'is_multi' => false,
+            'by_user' => false,
+            'user_id' => false,
+            'role_can_show' => [],
         ];
     }
 
@@ -142,17 +151,21 @@ class Detail extends Component
         try {
             DB::transaction(function () {
                 foreach ($this->alur_proseses as $alur) {
-
                     $validateData = [
-                        'role_id' => $alur['role_id'],
-                        'role_name' => RoleRepository::find($alur['role_id'])->name,
-                        'name' => $alur['name'],
+
+                        'alur_proses_id' => $this->alur_proses->id,
                         'nomor_urut' => $alur['nomor_urut'],
+                        'name' => $alur['name'],
+                        'role_id' => $alur['role_id'],
+                        'is_multi' => $alur['is_multi'],
+                        'by_user' => $alur['by_user'],
+                        'user_id' => $alur['user_id'],
+                        'role_can_show' => json_encode([]),
                     ];
-                    if ($alur['id']) {
-                        $vehicle = AlurProsesRepository::update($alur['id'], $validateData);
+                    if ($alur['alur_proses_detail_id']) {
+                        $vehicle = AlurProsesDetailRepository::update($alur['alur_proses_detail_id'], $validateData);
                     } else {
-                        $vehicle = AlurProsesRepository::create($validateData);
+                        $vehicle = AlurProsesDetailRepository::create($validateData);
                     }
                 }
             });
