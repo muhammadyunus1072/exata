@@ -549,99 +549,102 @@
                                                         >
                                                             <div class="p-3 bg-light">
                                                                 <form wire:submit.prevent="saveTransferSusulan">
-                                                                <div class="row">
-                                                                    @if(Auth::user()->roles[0]->name == 
-                                                                    App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                                    [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
-                                                                        <div class="col-auto mb-3">
-                                                                            <button type="submit" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveTransferSusulan">
-                                                                                Simpan
-                                                                            </button>
-                                                                        </div>
-                                                                    @endif
+                                                                    <div class="row">
+                                                                        @if(Auth::user()->roles[0]->name == 
+                                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                                        [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
+                                                                            <div class="col-auto mb-3">
+                                                                                <button type="submit" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveTransferSusulan">
+                                                                                    Simpan
+                                                                                </button>
+                                                                            </div>
+                                                                        @endif
+                                                                    
+                                                                
 
-                                                                    <table class="table table-sm table-no-bg">
-                                                                        <thead>
+                                                                        <table class="table table-sm table-no-bg">
+                                                                            <thead>
 
-                                                                            <tr>
-                                                                                <th class="text-center fs-4 fw-bold">No</th>
-                                                                                <th class="text-center fs-4 fw-bold">Tgl transfer</th>
-                                                                                <th class="text-center fs-4 fw-bold">Rekening Terbaru</th>
-                                                                                <th class="text-center fs-4 fw-bold">Rekening Lama</th>
-                                                                                <th class="text-center fs-4 fw-bold">No Input Japan</th>
-                                                                                <th class="text-center fs-4 fw-bold">Nama Lengkap</th>
-                                                                                <th class="text-center fs-4 fw-bold">Tgl Lahir</th>
-                                                                                <th class="text-center fs-4 fw-bold">Nominal Cair</th>
-                                                                            </tr>
-                                                                        </thead>
+                                                                                <tr>
+                                                                                    <th class="text-center fs-4 fw-bold">No</th>
+                                                                                    <th class="text-center fs-4 fw-bold">Tgl transfer</th>
+                                                                                    <th class="text-center fs-4 fw-bold">Rekening Terbaru</th>
+                                                                                    <th class="text-center fs-4 fw-bold">Rekening Lama</th>
+                                                                                    <th class="text-center fs-4 fw-bold">No Input Japan</th>
+                                                                                    <th class="text-center fs-4 fw-bold">Nama Lengkap</th>
+                                                                                    <th class="text-center fs-4 fw-bold">Tgl Lahir</th>
+                                                                                    <th class="text-center fs-4 fw-bold">Nominal Cair</th>
+                                                                                </tr>
+                                                                            </thead>
 
-                                                                        <tbody>
+                                                                            <tbody>
 
-                                                                        @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
-                                                                            
+                                                                            @foreach ($data_salah_transfers as $index_data_salah_transfer => $tranfer)
+                                                                                
 
-                                                                            <tr wire:key="transfer-susulan-{{$index_data_salah_transfer}}">
+                                                                                <tr wire:key="transfer-susulan-{{$index_data_salah_transfer}}">
 
-                                                                                <td rowspan="2">{{$loop->iteration}}</td>
+                                                                                    <td rowspan="2">{{$loop->iteration}}</td>
 
-                                                                                <td>
-                                                                                    @if(Auth::user()->roles[0]->name == 
-                                                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                                                        [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
+                                                                                    <td>
+                                                                                        @if(Auth::user()->roles[0]->name == 
+                                                                                            App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                                                            [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
 
-                                                                                        <div class="d-flex gap-0 p-0 m-0">
-                                                                                            <input placeholder="Tgl Transfer" type="date" 
-                                                                                            wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_transfer" 
-                                                                                            class="form-control mb-0 {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer'] ? '' : 'is-invalid' }}">
-                                                                                            
-                                                                                            @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_transfer')
-                                                                                                <div class="text-danger">{{ $message }}</div>
-                                                                                            @enderror
-                                                                                        </div>
-                                                                                    @else
-                                                                                        <p class="my-0 py-0 fs-5 fw-bold text-center">
-                                                                                            {{$tranfer['tanggal_transfer'] ? $tranfer['tanggal_transfer'] : "-"}}
-                                                                                        </p>
+                                                                                            <div class="d-flex gap-0 p-0 m-0">
+                                                                                                <input placeholder="Tgl Transfer" type="date" 
+                                                                                                wire:model="data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_transfer" 
+                                                                                                class="form-control mb-0 {{ $data_salah_transfers[$index_data_salah_transfer]['tanggal_transfer'] ? '' : 'is-invalid' }}">
+                                                                                                
+                                                                                                @error('data_salah_transfers.{{$index_data_salah_transfer}}.tanggal_transfer')
+                                                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                                                @enderror
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <p class="my-0 py-0 fs-5 fw-bold text-center">
+                                                                                                {{$tranfer['tanggal_transfer'] ? $tranfer['tanggal_transfer'] : "-"}}
+                                                                                            </p>
 
-                                                                                    @endif
-                                                                                </td>
+                                                                                        @endif
+                                                                                    </td>
 
-                                                                                <td>{{$tranfer['rekening_terbaru'] ? $tranfer['rekening_terbaru'] ."( ".$tranfer['jenis_rekening_terbaru']." )" : '-'}}</td>
+                                                                                    <td>{{$tranfer['rekening_terbaru'] ? $tranfer['rekening_terbaru'] ."( ".$tranfer['jenis_rekening_terbaru']." )" : '-'}}</td>
 
-                                                                                <td>{{$tranfer['rekening_lama']}} ({{$tranfer['jenis_rekening_lama']}})</td>
+                                                                                    <td>{{$tranfer['rekening_lama']}} ({{$tranfer['jenis_rekening_lama']}})</td>
 
-                                                                                <td>{{$tranfer['no_input_jepang']}}</td>
+                                                                                    <td>{{$tranfer['no_input_jepang']}}</td>
 
-                                                                                <td>{{$tranfer['nama_lengkap']}}</td>
+                                                                                    <td>{{$tranfer['nama_lengkap']}}</td>
 
-                                                                                <td>{{$tranfer['tanggal_lahir']}}</td>
+                                                                                    <td>{{$tranfer['tanggal_lahir']}}</td>
 
-                                                                                <td>@currency($tranfer['nominal_cair']) ({{$tranfer['mata_uang']}})</td>
+                                                                                    <td>@currency($tranfer['nominal_cair']) ({{$tranfer['mata_uang']}})</td>
 
-                                                                            </tr>
+                                                                                </tr>
 
 
-                                                                            <tr wire:key="transfer-susulan-ket-{{$index_data_salah_transfer}}">
-                                                                                <td colspan="7" class="my-0 py-0">
-                                                                                    <p class="text-dark my-0 py-0">Keterangan: <span class="text-danger">{{$tranfer['keterangan']}}</span></p>
+                                                                                <tr wire:key="transfer-susulan-ket-{{$index_data_salah_transfer}}">
+                                                                                    <td colspan="7" class="my-0 py-0">
+                                                                                        <p class="text-dark my-0 py-0">Keterangan: <span class="text-danger">{{$tranfer['keterangan']}}</span></p>
 
-                                                                                    @if($tranfer['updator_tanggal_transfer_name'])
-                                                                                        <div class="form-text text-info my-0 py-0">
-                                                                                            Diupdate oleh:
-                                                                                            {{$tranfer['updator_tanggal_transfer_name']}}
-                                                                                            , pada:
-                                                                                            {{$tranfer['tanggal_transfer_updated_at']}}
-                                                                                        </div>
-                                                                                    @endif
+                                                                                        @if($tranfer['updator_tanggal_transfer_name'])
+                                                                                            <div class="form-text text-info my-0 py-0">
+                                                                                                Diupdate oleh:
+                                                                                                {{$tranfer['updator_tanggal_transfer_name']}}
+                                                                                                , pada:
+                                                                                                {{$tranfer['tanggal_transfer_updated_at']}}
+                                                                                            </div>
+                                                                                        @endif
 
-                                                                                </td>
-                                                                            </tr>
+                                                                                    </td>
+                                                                                </tr>
 
-                                                                        @endforeach
+                                                                            @endforeach
 
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                             
                                                         </div>
@@ -674,7 +677,7 @@
                                                             Auth::user()->roles[0]->name == 
                                                         App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                         [$alur['role_name']] 
-                                                        && (($alur['is_multi'] && $alur['user_id'] == Auth::user()->id) || !$alur['is_multi'])
+                                                        && $alur['user_id'] == Auth::user()->id
                                                         && ($alur['by_user'] && $alur['user_id'] == Auth::user()->id || !$alur['by_user'])
                                                         ) 
                                                             <input 
