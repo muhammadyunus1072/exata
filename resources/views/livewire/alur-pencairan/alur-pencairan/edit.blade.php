@@ -659,7 +659,10 @@
                                                 <tr wire:key="alur-proses-{{$index_alur}}"  data-bs-toggle="collapse"
                                                     data-bs-target="#kokumin-{{$index_alur}}" style="cursor: pointer;">
                                                     <td>{{$nomor_urut}}</td>
-                                                    <td>{{$alur['role_name']}}</td> 
+                                                    <td>{{$alur['user_name'] 
+                                                            && (App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                            [$alur['role_name']] != App\Models\AlurPencairan\AlurPencairan::ROLE_CC) ? $alur['user_name']." -" : ""}} {{$alur['role_name']}}
+                                                    </td> 
                                                     <td>{{$alur['name']}}</td>
                                                     <td class="d-flex justify-content-center">
                                                        @if ($alur['jumlah_belum_bayar_kokumin'])
@@ -846,7 +849,8 @@
                                                     <td>{{$nomor_urut}}</td>
                                                     <td>{{$alur['user_name'] 
                                                             && (App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                            [$alur['role_name']] != App\Models\AlurPencairan\AlurPencairan::ROLE_CC) ? $alur['user_name']." -" : ""}} {{$alur['role_name']}}</td> 
+                                                            [$alur['role_name']] != App\Models\AlurPencairan\AlurPencairan::ROLE_CC) ? $alur['user_name']." -" : ""}} {{$alur['role_name']}}
+                                                    </td> 
                                                     <td>{{$alur['name']}}</td>
                                                     <td class="d-flex justify-content-center">
                                                         @if(
