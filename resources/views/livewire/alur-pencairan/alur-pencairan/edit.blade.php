@@ -652,6 +652,180 @@
                                                     </td>
                                                 </tr>
                                                 @break
+                                            @case(App\Models\AlurPencairan\AlurProsesDetail::KEY_KOKUMIN)
+                                                @php
+                                                    $nomor_urut ++;
+                                                @endphp
+                                                <tr wire:key="alur-proses-{{$index_alur}}"  data-bs-toggle="collapse"
+                                                    data-bs-target="#kokumin-{{$index_alur}}" style="cursor: pointer;">
+                                                    <td>{{$nomor_urut}}</td>
+                                                    <td>{{$alur['role_name']}}</td> 
+                                                    <td>{{$alur['name']}}</td>
+                                                    <td class="d-flex justify-content-center">
+                                                       @if ($alur['jumlah_belum_bayar_kokumin'])
+                                                            <h3 class="text-danger"> ({{$alur['jumlah_belum_bayar_kokumin']}})</h3>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" checked disabled style="border: 1px solid #D9CFC7">
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <h3 class="text-danger">Klik untuk melihat detail</h3>
+                                                    </td>
+                                                    <td>
+                                                        @if(Auth::user()->roles[0]->name == 
+                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                        [$alur['role_name']])
+                                                            <input type="text" class="form-control py-0" wire:model="alur_proseses.{{$index_alur}}.keterangan" placeholder="-- ISI --">
+                                                        @else
+                                                            <p class="py-0">{{$alur_proseses[$index_alur]['keterangan']}}</p>
+                                                        @endIf
+                                                    </td>
+                                                </tr>
+                                                {{-- COLLAPSE KOKUMIN --}}
+                                                <tr wire:key="alur-detail-{{$index_alur}}">
+                                                    <td colspan="100" class="p-0 border-0">
+
+                                                        <div
+                                                            id="kokumin-{{$index_alur}}"
+                                                            class="collapse auto-close-collapse"
+                                                            wire:ignore.self
+                                                        >
+                                                            <div class="p-3 bg-light">
+                                                                <div class="row">
+                                                                    
+                                                                    {{-- BUTTON --}}
+                                                                    <form wire:submit.prevent="saveKokumin">
+                                                                    @if(
+                                                                        Auth::user()->roles[0]->name == 
+                                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                                        [$alur['role_name']] 
+                                                                        && $alur['user_id'] == Auth::user()->id
+                                                                        && ($alur['by_user'] && $alur['user_id'] == Auth::user()->id || !$alur['by_user'])
+                                                                        )
+                                                                        <div class="col-auto mb-3">
+                                                                            <button type="button" wire:loading.attr="disabled" class="btn btn-info mt-3" wire:click="addKokumin('{{$alur['id']}}', '{{$index_alur}}')">
+                                                                                Tambah Data Kokumin
+                                                                            </button>
+                                                                            <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveKokumin('{{$index_alur}}')">
+                                                                                Simpan
+                                                                            </button>
+                                                                        </div>
+                                                                    @endif
+                                                                    
+                                                                    <table class="table table-sm table-no-bg w-full">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="text-center fs-4 fw-bold">#</th>
+                                                                                <th class="text-center fs-4 fw-bold">Nama</th>
+                                                                                <th class="text-center fs-4 fw-bold">Status</th>
+                                                                                <th class="text-center fs-4 fw-bold">Aksi</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody>
+
+                                                                        @foreach ($alur['kokumin'] as $index_kokumin => $kokumin)
+                                                                            @if (!$kokumin['is_remove'])
+                                                                                <tr wire:key="kokumin-{{$kokumin['key']}}">
+
+                                                                                    <td>{{$loop->iteration}}</td>
+                                                                                    @if(
+                                                                                        Auth::user()->roles[0]->name == 
+                                                                                        App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
+                                                                                        [$alur['role_name']] 
+                                                                                        && $alur['user_id'] == Auth::user()->id
+                                                                                        && ($alur['by_user'] && $alur['user_id'] == Auth::user()->id || !$alur['by_user'])
+                                                                                        )
+                                                                                        <td>
+                                                                                            <input placeholder="Nama" type="text"
+                                                                                                wire:model="alur_proseses.{{$index_alur}}.kokumin.{{$index_kokumin}}.nama"
+                                                                                                class="form-control">
+                                                                            
+                                                                                            @error('alur_proseses.{{$index_alur}}.kokumin.{{$index_kokumin}}.nama')
+                                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                                            @enderror
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <select wire:model="alur_proseses.{{$index_alur}}.kokumin.{{$index_kokumin}}.status" class="form-select">
+                                                                                                @foreach (App\Models\AlurPencairan\AlurPencairanKokumin::STATUS_CHOICE as $key => $name)    
+                                                                                                    <option value="{{$key}}">{{$name}}</option>
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                            
+                                                                                            @error('alur_proseses.{{$index_alur}}.kokumin.{{$index_kokumin}}.status')
+                                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                                            @enderror
+                                                                                        </td>
+                                                                                        <td>
+
+                                                                                            @if (!$kokumin['id'])
+                                                                                                <div class="row d-flex justify-content-center">
+                                                                                                    <button type="button" wire:loading.attr="disabled" class="btn btn-danger col-auto" wire:click="removeKokumin('{{$index_alur}}','{{$index_kokumin}}')">
+                                                                                                        <i class="ki-duotone ki-trash fs-1">
+                                                                                                            <span class="path1"></span>
+                                                                                                            <span class="path2"></span>
+                                                                                                            <span class="path3"></span>
+                                                                                                            <span class="path4"></span>
+                                                                                                            <span class="path5"></span>
+                                                                                                        </i>
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    @else
+                                                                                        <td>
+                                                                                            <p class="text-center">{{$kokumin['nama']}}</p>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @php
+                                                                                                $color = 'danger';
+                                                                                                switch ($kokumin['status']) {
+                                                                                                    case App\Models\AlurPencairan\AlurPencairanKokumin::STATUS_BELUM:
+                                                                                                        $color = 'danger';
+                                                                                                        break;
+                                                                                                    case App\Models\AlurPencairan\AlurPencairanKokumin::STATUS_FOLLOW_UP:
+                                                                                                        $color = 'primary';
+                                                                                                        break;
+                                                                                                    case App\Models\AlurPencairan\AlurPencairanKokumin::STATUS_BAYAR:
+                                                                                                        $color = 'success';
+                                                                                                        break;
+                                                                                                    
+                                                                                                    default:
+                                                                                                        $color = 'danger';
+                                                                                                        break;
+                                                                                                }
+                                                                                            @endphp
+                                                                                            <div class="col-auto">
+                                                                                                <p class="text-center btn btn-sm btn-{{$color}}">{{$kokumin['status']}}</p>
+                                                                                            </div>
+                                                                                        </td>      
+                                                                                        <td>
+                                                                                            @if ($kokumin['id'])
+                                                                                                <div class="form-text text-info my-0 py-0 col-auto text-center">
+                                                                                                    Diupdate oleh:
+                                                                                                    {{$kokumin['updator_name']}}
+                                                                                                    , pada:
+                                                                                                    {{$kokumin['updated_at']}}
+                                                                                                </div>
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    @endif
+                                                                                </tr>
+                                                                            @endif
+
+                                                                        @endforeach
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                                @break
                                             @default
                                             @php
                                                 if($alur['is_multi']){

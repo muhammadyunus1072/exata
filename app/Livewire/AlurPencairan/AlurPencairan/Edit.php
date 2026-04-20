@@ -7,15 +7,18 @@ use App\Helpers\NumberFormatter;
 use App\Models\AlurPencairan\AlurPencairan;
 use App\Models\AlurPencairan\AlurPencairanDetail;
 use App\Models\AlurPencairan\AlurPencairanHistory;
+use App\Models\AlurPencairan\AlurPencairanKokumin;
 use App\Models\AlurPencairan\AlurPencairanStatus;
 use App\Repositories\AlurPencairan\AlurPencairanDetailRepository;
 use App\Repositories\AlurPencairan\AlurPencairanHistoryRepository;
+use App\Repositories\AlurPencairan\AlurPencairanKokuminRepository;
 use App\Repositories\AlurPencairan\AlurPencairanRepository;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -51,17 +54,32 @@ class Edit extends Component
         ];
         $this->plan_transfer = $alur_pencairan['plan_transfer'];
         $this->alur_proseses = [];
-        foreach ($alur_pencairan->alurPencairanStatuses as $detail) {
+        foreach ($alur_pencairan->alurPencairanStatuses as $alurStatus) {
 
+            $kokumin = [];
+            foreach ($alurStatus->alurPencairanKokumins as $item) {
+                $kokumin[] = [
+                    'key' => Str::random(10),
+                    'id' => Crypt::encrypt($item['id']),
+                    'alur_pencairan_status_id' => Crypt::encrypt($item['alur_pencairan_status_id']),
+                    'nama' => $item['nama'],
+                    'status' => $item['status'],
+                    'updator_name' => $item->updator->name,
+                    'updated_at' => $item->updated_at,
+                    'is_remove' => false,
+                ];
+            }
             $this->alur_proseses[] = array_merge(
                 [
-                    'is_check' => $detail['status'] == AlurPencairanStatus::STATUS_DONE ? true : false,
-                    'creator_name' => $detail['status'] == AlurPencairanStatus::STATUS_PENDING ? '' : $detail['status'] . " oleh : " . $detail->statusUpdator->name,
-                    'tanggal_update' => $detail['status'] == AlurPencairanStatus::STATUS_PENDING ? '' : $detail['tanggal_update'],
-                    'keterangan_old' => $detail['keterangan'],
-                    'user_name' => $detail->user->name,
+                    'is_check' => $alurStatus['status'] == AlurPencairanStatus::STATUS_DONE ? true : false,
+                    'creator_name' => $alurStatus['status'] == AlurPencairanStatus::STATUS_PENDING ? '' : $alurStatus['status'] . " oleh : " . $alurStatus->statusUpdator->name,
+                    'tanggal_update' => $alurStatus['status'] == AlurPencairanStatus::STATUS_PENDING ? '' : $alurStatus['tanggal_update'],
+                    'keterangan_old' => $alurStatus['keterangan'],
+                    'user_name' => $alurStatus->user->name,
+                    'kokumin' => $kokumin,
+                    'jumlah_belum_bayar_kokumin' => count($alurStatus->alurPencairanKokuminBelumBayar)
                 ],
-                $detail->toArray()
+                $alurStatus->toArray(),
             );
         }
         $this->getJumlahBelumMelengkapiRekeningSalah();
@@ -302,6 +320,70 @@ class Edit extends Component
             $this->data_transfer_removes[] = $this->data_salah_transfers[$index]['id'];
         }
         unset($this->data_salah_transfers[$index]);
+    }
+
+    public function addKokumin($alur_pencairan_status_id, $index_alur)
+    {
+        $this->alur_proseses[$index_alur]['kokumin'][] = [
+            'key' => Str::random(10),
+            'id' => '',
+            'alur_pencairan_status_id' => Crypt::encrypt($alur_pencairan_status_id),
+            'nama' => '',
+            'status' => AlurPencairanKokumin::STATUS_BELUM,
+            'is_remove' => false,
+        ];
+    }
+
+    public function removeKokumin($index_alur, $index_kokumin)
+    {
+        if (!$this->alur_proseses[$index_alur]['kokumin'][$index_kokumin]['id']) {
+            $this->alur_proseses[$index_alur]['kokumin'][$index_kokumin]['is_remove'] = true;
+        }
+    }
+    public function saveKokumin($index_alur)
+    {
+        try {
+            DB::transaction(function () use ($index_alur) {
+                foreach ($this->alur_proseses[$index_alur]['kokumin'] as $kokumin) {
+
+                    if (!$kokumin['nama']) {
+                        throw new Exception("Nama harus di isi");
+                    }
+                    if ($kokumin['id']) {
+                        $validateData = [
+                            'nama' => $kokumin['nama'],
+                            'status' => $kokumin['status'],
+                        ];
+                        # code...
+                        $vehicle = AlurPencairanKokuminRepository::update(Crypt::decrypt($kokumin['id']), $validateData);
+                    } else {
+                        $validateData = [
+                            'alur_pencairan_status_id' => Crypt::decrypt($kokumin['alur_pencairan_status_id']),
+                            'nama' => $kokumin['nama'],
+                            'status' => $kokumin['status'],
+                        ];
+                        $vehicle = AlurPencairanKokuminRepository::create($validateData);
+                    }
+                }
+                $this->dispatch('notification-refresh');
+            });
+
+            $this->getDataSalahTransfer();
+            DB::commit();
+            Alert::confirmation(
+                $this,
+                Alert::ICON_SUCCESS,
+                "Berhasil",
+                "Berhasil Meyimpan Transfer Susulan",
+                "on-dialog-confirm",
+                "on-dialog-cancel",
+                "Oke",
+                "Tutup",
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Alert::fail($this, "Gagal", $e->getMessage());
+        }
     }
 
     public function saveChanges()

@@ -67,6 +67,7 @@ class AlurProsesDetail extends Model
     public const KEY_INFO_REK_SALAH = 'info_rek_salah';
     public const KEY_MELENGKAPI_REK_SALAH = 'melengkapi_rek_salah';
     public const KEY_TRANSFER_SUSULAN = 'transfer_susulan';
+    public const KEY_KOKUMIN = 'kokumin';
 
     // ------------- //
     // ALUR SPEED 20 //
@@ -927,7 +928,7 @@ class AlurProsesDetail extends Model
         'is_multi' => true,
         'by_user' => false,
         'user_id' => null,
-        'alur_proses_key' => null,
+        'alur_proses_key' => self::KEY_KOKUMIN,
         'role_can_show' => [],
     ];
 

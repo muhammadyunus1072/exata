@@ -126,6 +126,19 @@ class AlurPencairanStatus extends Model
     {
         return $this->belongsTo(AlurProsesDetail::class, 'alur_proses_detail_id', 'id');
     }
+
+    public function alurPencairanKokumins()
+    {
+        return $this->hasMany(AlurPencairanKokumin::class, 'alur_pencairan_status_id', 'id')->where('created_by', '=', $this->user_id);
+    }
+
+    public function alurPencairanKokuminBelumBayar()
+    {
+        return $this->hasMany(AlurPencairanKokumin::class, 'alur_pencairan_status_id', 'id')
+            ->where('status', '!=', AlurPencairanKokumin::STATUS_BAYAR)
+            ->where('created_by', '=', $this->user_id);
+    }
+
     public function alurPencairanDetail()
     {
         return $this->hasMany(AlurPencairanDetail::class, 'alur_pencairan_id', 'alur_pencairan_id');
