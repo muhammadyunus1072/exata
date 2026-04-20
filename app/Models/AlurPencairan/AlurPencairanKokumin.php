@@ -52,6 +52,13 @@ class AlurPencairanKokumin extends Model
                     . $model->status;
                 $title = 'Perubahan Status Kokumin';
             }
+            if ($model->isDirty('nama')) {
+                $note = 'Nama Kokumin diubah: '
+                    . $model->getOriginal('nama')
+                    . ' menjadi: '
+                    . $model->nama;
+                $title = 'Perubahan Nama Kokumin';
+            }
             if ($title) {
                 AlurNotificationHistoryRepository::create([
                     'remarks_id' => $model->id,

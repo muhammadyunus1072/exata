@@ -340,29 +340,30 @@ class Edit extends Component
             $this->alur_proseses[$index_alur]['kokumin'][$index_kokumin]['is_remove'] = true;
         }
     }
-    public function saveKokumin($index_alur)
+    public function saveKokumin()
     {
         try {
-            DB::transaction(function () use ($index_alur) {
-                foreach ($this->alur_proseses[$index_alur]['kokumin'] as $kokumin) {
-
-                    if (!$kokumin['nama']) {
-                        throw new Exception("Nama harus di isi");
-                    }
-                    if ($kokumin['id']) {
-                        $validateData = [
-                            'nama' => $kokumin['nama'],
-                            'status' => $kokumin['status'],
-                        ];
-                        # code...
-                        $vehicle = AlurPencairanKokuminRepository::update(Crypt::decrypt($kokumin['id']), $validateData);
-                    } else {
-                        $validateData = [
-                            'alur_pencairan_status_id' => Crypt::decrypt($kokumin['alur_pencairan_status_id']),
-                            'nama' => $kokumin['nama'],
-                            'status' => $kokumin['status'],
-                        ];
-                        $vehicle = AlurPencairanKokuminRepository::create($validateData);
+            DB::transaction(function () {
+                foreach ($this->alur_proseses as $alur) {
+                    foreach ($alur['kokumin'] as $kokumin) {
+                        if (!$kokumin['nama']) {
+                            throw new Exception("Nama harus di isi");
+                        }
+                        if ($kokumin['id']) {
+                            $validateData = [
+                                'nama' => $kokumin['nama'],
+                                'status' => $kokumin['status'],
+                            ];
+                            # code...
+                            $vehicle = AlurPencairanKokuminRepository::update(Crypt::decrypt($kokumin['id']), $validateData);
+                        } else {
+                            $validateData = [
+                                'alur_pencairan_status_id' => Crypt::decrypt($kokumin['alur_pencairan_status_id']),
+                                'nama' => $kokumin['nama'],
+                                'status' => $kokumin['status'],
+                            ];
+                            $vehicle = AlurPencairanKokuminRepository::create($validateData);
+                        }
                     }
                 }
                 $this->dispatch('notification-refresh');
@@ -390,7 +391,7 @@ class Edit extends Component
     {
         try {
             DB::transaction(function () {
-
+                $this->saveKokumin();
                 if (Auth::user()->roles[0]->name == AlurPencairan::ROLE_ALIASE[AlurPencairan::ROLE_ACC_EXATA]) {
                     $validateData = [
                         'plan_transfer' => $this->plan_transfer,

@@ -697,7 +697,6 @@
                                                                 <div class="row">
                                                                     
                                                                     {{-- BUTTON --}}
-                                                                    <form wire:submit.prevent="saveKokumin">
                                                                     @if(
                                                                         Auth::user()->roles[0]->name == 
                                                                         App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
@@ -715,7 +714,7 @@
                                                                         </div>
                                                                     @endif
                                                                     
-                                                                    <table class="table table-sm table-no-bg w-full">
+                                                                    <table class="table table-sm table-no-bg-1 w-full">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th class="text-center fs-4 fw-bold">#</th>
@@ -820,7 +819,6 @@
 
                                                                         </tbody>
                                                                     </table>
-                                                                    </form>
                                                                 </div>
                                                             </div>
                                                             
@@ -1036,6 +1034,14 @@
         table.table-no-bg tr:nth-child(4n-1),
         table.table-no-bg tr:nth-child(4n) {
             background-color: #ffffff; /* group 2 */
+        }
+
+        table.table-no-bg-1 tr:nth-child(2n){
+            background-color: #ffffff; /* group 1 */
+        }
+
+        table.table-no-bg-1 tr:nth-child(2n+1) {
+            background-color: #afe3e8; /* group 2 */
         }
 
         @media screen and (max-width: 700px) {
