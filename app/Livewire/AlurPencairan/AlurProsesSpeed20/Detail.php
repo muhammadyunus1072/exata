@@ -21,21 +21,23 @@ class Detail extends Component
     public $alur_proses_removes = [];
     public $roles = [];
     public $users = [];
+    public $alur_proses;
+
     public array $oldNomor = [];
 
     public function mount()
     {
-        $this->roles = RoleRepository::getIdAndNames()->pluck('name')->toArray();
+        $this->roles = RoleRepository::getIdAndNames()->pluck('name', 'id')->toArray();
         $this->users = UserRepository::all()->pluck('name', 'id')->toArray();
         $this->getAlurProseses();
     }
 
     private function getAlurProseses()
     {
-        $alur_proses = AlurProsesRepository::findBy([
+        $this->alur_proses = AlurProsesRepository::findBy([
             ['name', '=', AlurProses::TYPE_SPEED_20]
         ]);
-        $this->alur_proseses = collect($alur_proses->alurProsesDetails)
+        $this->alur_proseses = collect($this->alur_proses->alurProsesDetails)
             ->sortBy('nomor_urut')
             ->values()
             ->map(function ($detail) {
@@ -128,8 +130,8 @@ class Detail extends Component
 
     public function removeAlurProses($index)
     {
-        if ($this->alur_proseses[$index]['id']) {
-            $this->alur_proses_removes[] = $this->alur_proseses[$index]['id'];
+        if ($this->alur_proseses[$index]['alur_proses_detail_id']) {
+            $this->alur_proses_removes[] = $this->alur_proseses[$index]['alur_proses_detail_id'];
         }
         unset($this->alur_proseses[$index]);
     }
@@ -151,6 +153,7 @@ class Detail extends Component
         try {
             DB::transaction(function () {
                 foreach ($this->alur_proseses as $alur) {
+
                     $validateData = [
 
                         'alur_proses_id' => $this->alur_proses->id,
@@ -187,7 +190,6 @@ class Detail extends Component
             Alert::fail($this, "Gagal", $e->getMessage());
         }
     }
-
     public function render()
     {
         return view('livewire.alur-pencairan.alur-proses.detail');

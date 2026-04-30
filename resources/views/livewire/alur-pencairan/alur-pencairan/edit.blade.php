@@ -190,13 +190,17 @@
                                                                     @if(Auth::user()->roles[0]->name == 
                                                                     App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                     [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
-                                                                        <div class="col-auto mb-3">
-                                                                            <button type="button" wire:loading.attr="disabled" class="btn btn-info mt-3" wire:click="addDataSalahTransfer">
-                                                                                Tambah Data Salah Transfer
-                                                                            </button>
-                                                                            <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveDataSalahTransfer">
-                                                                                Simpan
-                                                                            </button>
+                                                                        <div class="row d-flex flex-nowrap">
+                                                                            <div class="col-md-3 mb-3">
+                                                                                <button type="button" wire:loading.attr="disabled" class="btn btn-info mt-3 w-100 " wire:click="addDataSalahTransfer">
+                                                                                    Tambah Data Salah Transfer
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="col-md-3 md-3">
+                                                                                <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3 w-100" wire:click="saveDataSalahTransfer">
+                                                                                    Simpan
+                                                                                </button>
+                                                                            </div>
                                                                         </div>
                                                                     @endif
                                                                         
@@ -338,12 +342,18 @@
                                                                             @if(Auth::user()->roles[0]->name == 
                                                                             App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                             [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
-                                                                                <button type="button" wire:loading.attr="disabled" class="btn btn-info mt-3" wire:click="addDataSalahTransfer">
-                                                                                    Tambah Data Salah Transfer
-                                                                                </button>
-                                                                                <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveDataSalahTransfer">
-                                                                                    Simpan
-                                                                                </button>
+                                                                                 <div class="row d-flex flex-nowrap">
+                                                                                    <div class="col-md-3 mb-3">
+                                                                                        <button type="button" wire:loading.attr="disabled" class="btn btn-info mt-3 w-100 " wire:click="addDataSalahTransfer">
+                                                                                            Tambah Data Salah Transfer
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 md-3">
+                                                                                        <button type="button" wire:loading.attr="disabled" class="btn btn-success mt-3 w-100" wire:click="saveDataSalahTransfer">
+                                                                                            Simpan
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
                                                                             @endif
                                                                         </div>
                                                                     </form>
@@ -401,10 +411,10 @@
                                                                     @if(Auth::user()->roles[0]->name ==
                                                                         App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
                                                                         [App\Models\AlurPencairan\AlurPencairan::ROLE_HS])
-                                                                            <div class="mb-3">
+                                                                            <div class="col-md-3 mb-3">
                                                                                 <button
                                                                                     type="submit"
-                                                                                    class="btn btn-success"
+                                                                                    class="btn btn-success w-100"
                                                                                     wire:click="saveMelengkapiRekeningSalah"
                                                                                     wire:loading.attr="disabled"
                                                                                 >
@@ -552,9 +562,9 @@
                                                                     <div class="row">
                                                                         @if(Auth::user()->roles[0]->name == 
                                                                         App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                                        [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
-                                                                            <div class="col-auto mb-3">
-                                                                                <button type="submit" wire:loading.attr="disabled" class="btn btn-success mt-3" wire:click="saveTransferSusulan">
+                                                                        [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
+                                                                            <div class="col-md-3 mb-3">
+                                                                                <button type="submit" wire:loading.attr="disabled" class="btn btn-success mt-3 w-100" wire:click="saveTransferSusulan">
                                                                                     Simpan
                                                                                 </button>
                                                                             </div>
@@ -589,7 +599,7 @@
                                                                                     <td>
                                                                                         @if(Auth::user()->roles[0]->name == 
                                                                                             App\Models\AlurPencairan\AlurPencairan::ROLE_ALIASE
-                                                                                            [App\Models\AlurPencairan\AlurPencairan::ROLE_PAK_NOVI])
+                                                                                            [App\Models\AlurPencairan\AlurPencairan::ROLE_FINANCE])
 
                                                                                             <div class="d-flex gap-0 p-0 m-0">
                                                                                                 <input placeholder="Tgl Transfer" type="date" 
