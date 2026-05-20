@@ -59,6 +59,9 @@ class AlurPencairanStatus extends Model
             case AlurProsesDetail::KEY_TRANSFER_SUSULAN:
                 return count($this->alurPencairanDetailBelumTransferSusulan) ? false : true;
                 break;
+            case AlurProsesDetail::KEY_KOKUMIN:
+                return count($this->alurPencairanKokuminBelumBayar) ? false : true;
+                break;
 
             default:
                 return $this->status  == AlurPencairanStatus::STATUS_DONE ? true : false;
